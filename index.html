@@ -178,7 +178,7 @@ input:focus-visible,select:focus-visible,button:focus-visible,textarea:focus-vis
  #reportPrint h1{font-size:21pt;margin:0}#reportPrint h2{font-size:15pt;color:#225780;margin:20px 0 8px;padding-bottom:5px;border-bottom:1px solid #b8d2e8}
  #reportPrint .print-sub{font-size:9pt;color:#5a6c80}
  #reportPrint .card{box-shadow:none!important;border:1px solid #dce5ed;padding:10px 12px;margin:8px 0;break-inside:avoid-page;background:#fff}
- #reportPrint .easy-note{display:none}#reportPrint .easy-intro{background:#edf7ff}
+ #reportPrint .easy-note{display:none}#reportPrint .easy-detail{display:block!important;background:#f1f9ff;border:1px solid #d0e4f4;padding:5px 8px;font-size:8.5pt}#reportPrint .easy-detail summary{font-size:8.5pt}#reportPrint .easy-detail p{margin:3px 0}#reportPrint .easy-intro{background:#edf7ff}
  #reportPrint .dcard{break-inside:avoid}#reportPrint .hscroll{overflow:visible;display:flex;flex-wrap:wrap}
  #reportPrint .hscroll>*{flex:1 1 95px}#reportPrint .tblw{overflow:visible}
  #reportPrint .print-section{break-before:page}#reportPrint .print-section:first-of-type{break-before:auto}
@@ -186,6 +186,24 @@ input:focus-visible,select:focus-visible,button:focus-visible,textarea:focus-vis
  #reportPrint .ypick,#reportPrint button,#reportPrint input,#reportPrint select,#reportPrint textarea{display:none!important}
  #reportPrint .footnote{font-size:8.5pt;color:#65788d;border-top:1px solid #dce5ed;margin-top:18px;padding-top:9px}
 }
+
+/* v3.6: 결과별 쉬운 풀이. 자세한 해설은 기본 접힘, 인쇄/PDF는 모두 표시 */
+.easy-detail{margin:8px 0 5px;padding:8px 11px;border:1px solid #cfe5f6;border-radius:10px;background:#f2f9fe;color:#31556e;font-size:13px;line-height:1.7}
+.easy-detail[hidden]{display:none!important}
+.easy-detail summary{cursor:pointer;font-weight:750;color:#205d8b;font-size:12.5px;list-style:revert}
+.easy-detail p{margin:6px 0 2px}
+.easy-detail .easy-action{margin-top:7px;border-radius:7px;padding:6px 8px;background:#fff;color:#285f75}
+.mcard .easy-detail{margin-top:12px}
+.dcard .easy-detail{font-size:11.5px;text-align:left}
+.dcard .easy-detail summary{font-size:11px}
+.bar{flex-wrap:wrap}.bar>.easy-detail{flex:1 0 100%;margin-left:52px}
+.yt td .easy-detail{min-width:180px}
+
+/* v3.7 선택형 출생시간 입력 */
+.birth-time-mode button{font-size:13px;min-width:0;padding:10px 3px}
+#branchTimeWrap select{background:#fff}
+#branchTimeWrap .hint{background:#edf7ff;border:1px solid #d0e7fb;border-radius:10px;padding:9px 11px}
+@media(max-width:370px){.birth-time-mode button{font-size:12px}}
 </style>
 </head>
 <body>
@@ -202,8 +220,19 @@ input:focus-visible,select:focus-visible,button:focus-visible,textarea:focus-vis
   <div class="seg" id="cal" style="margin-bottom:8px"><button data-v="solar" class="on">양력</button><button data-v="lunar">음력</button><button data-v="leap">음력 윤달</button></div>
   <input id="birth" inputmode="numeric" pattern="[0-9]*" placeholder="19850512" autocomplete="bday">
   <div class="hint" id="birthView">8자리 숫자로 입력 (예: 19850512)</div>
-  <label class="lab">태어난 시간</label>
-  <div class="row"><input id="btime" type="time" aria-label="출생 시간"><label class="ck2"><input type="checkbox" id="tUnknown">모름</label></div><div id="timeWindow" style="display:none;margin-top:8px"><label class="lab" for="timeRange">시간을 모르는 범위</label><select id="timeRange"><option value="all">하루 중 전혀 모름 (경계 후보 검토)</option><option value="before23">당일 23시 이전은 확실함</option></select><p class="hint">23시대에는 일주가 달라질 수 있습니다. 전체 시간이 미상일 경우 원국 해석을 확정하지 않습니다.</p></div>
+  <label class="lab">태어난 시간은 어느 정도 알고 계신가요?</label>
+  <div class="seg birth-time-mode" id="birthTimeMode" role="group" aria-label="출생시간 입력 방식"><button type="button" data-v="exact" class="on">정확한 시각</button><button type="button" data-v="branch">태어난 시(時)</button><button type="button" data-v="unknown">모름</button></div>
+  <div id="exactTimeWrap" style="margin-top:10px"><label class="lab" for="btime">태어난 정확한 시각</label><input id="btime" type="time" aria-label="출생 시간"></div>
+  <div id="branchTimeWrap" style="display:none;margin-top:10px"><label class="lab" for="branchTime">태어난 시진(時辰) 선택</label><select id="branchTime">
+   <option value="">어느 시(時)에 태어났는지 선택하세요</option>
+   <option value="0">자시(子時) · 밤 11시~새벽 1시</option><option value="1">축시(丑時) · 새벽 1~3시</option>
+   <option value="2">인시(寅時) · 새벽 3~5시</option><option value="3">묘시(卯時) · 오전 5~7시</option>
+   <option value="4">진시(辰時) · 오전 7~9시</option><option value="5">사시(巳時) · 오전 9~11시</option>
+   <option value="6">오시(午時) · 오전 11시~오후 1시</option><option value="7">미시(未時) · 오후 1~3시</option>
+   <option value="8">신시(申時) · 오후 3~5시</option><option value="9">유시(酉時) · 오후 5~7시</option>
+   <option value="10">술시(戌時) · 오후 7~9시</option><option value="11">해시(亥時) · 오후 9~11시</option>
+  </select><p class="hint">정확한 분을 몰라도 괜찮습니다. 시진에 해당하는 시간 범위를 비교합니다. 특히 자시는 자정 전후의 후보가 다를 수 있어요.</p></div>
+  <div id="unknownTimeWrap" style="display:none"><input type="checkbox" id="tUnknown" hidden aria-hidden="true"><div id="timeWindow" style="margin-top:8px"><label class="lab" for="timeRange">시간을 모르는 범위</label><select id="timeRange"><option value="all">하루 중 전혀 모름 (경계 후보 검토)</option><option value="before23">당일 23시 이전은 확실함</option></select><p class="hint">23시대에는 일주가 달라질 수 있습니다. 전체 시간이 미상일 경우 원국 해석을 확정하지 않습니다.</p></div></div>
   <div class="hint">서머타임 이력은 자동 검토합니다. 태양시 보정은 전문가 설정에서 선택하며, 계산 기준에 따라 결과가 달라질 수 있습니다.</div>
   <label class="lab">태어난 곳</label>
   <select id="city" aria-label="한국 출생 도시"></select><p class="hint">현재는 대한민국 출생만 지원합니다. 해외 출생은 계산하지 않습니다.</p>
@@ -374,10 +403,41 @@ var SJ = (function () {
       var day=lo.getDay(), time=lo.getTime(), used=wall(appliedMs(mode,u)); if(sect===2 && used.h===23){ var di=G.indexOf(day[0]),zi=Z.indexOf(time[1]); time=G[((di%5)*2+zi)%10]+time[1]; } return { y: bj.getYear(), m: bj.getMonth(), d: day, h: time, bj: bj, lo: lo };
     }
     var mode = inp.timeMode || 'mean', sect = inp.zi || 1;
+    var branchMeta=null;
+    if(inp.timeKind==='branch'){
+      var bi=Number(inp.branch);
+      if(!Number.isInteger(bi)||bi<0||bi>11)return {error:'자시부터 해시까지 12개의 시진 중 하나를 선택해 주세요.'};
+      var branchNames=['자시','축시','인시','묘시','진시','사시','오시','미시','신시','유시','술시','해시'];
+      var branchSamples=[], unique={}, alternatives=[];
+      // 시진은 출생기록의 현지 시계시간 범위로 입력받는다. 지역/태양시 보정 후 결과가 달라지는지도 비교한다.
+      var startMinute=(bi===0?23*60:(bi*2-1)*60);
+      for(var bmin=0;bmin<120;bmin+=5){
+        var total=(startMinute+bmin)%(24*60), bh=Math.floor(total/60), bm=total%60;
+        var bk=krToUtc(sy,sm,sd,bh,bm,inp.overlapChoice);
+        if(bk.gap||bk.ambiguous)continue;
+        var savedOff=stdOff,savedEq=eq;
+        stdOff=DST_SET[bk.off]?bk.off-60:bk.off;eq=eot(bk.utc);
+        var bp=pillarsAt(bk.utc,mode,sect), sig=[bp.y,bp.m,bp.d,bp.h].join('/');
+        if(!unique[sig]){unique[sig]=true;alternatives.push({label:pad(bh)+':'+pad(bm)+' 등 가능 시간',p:[bp.y,bp.m,bp.d,bp.h]});}
+        branchSamples.push({h:bh,mi:bm,utc:bk.utc,k:bk,signature:sig});
+        stdOff=savedOff;eq=savedEq;
+      }
+      // 구간 종료 직전의 후보도 확인한다.
+      var lastTotal=(startMinute+119)%(24*60),lastH=Math.floor(lastTotal/60),lastM=lastTotal%60;
+      var lastK=krToUtc(sy,sm,sd,lastH,lastM,inp.overlapChoice);
+      if(!lastK.gap&&!lastK.ambiguous){var oldStd=stdOff,oldEq=eq;stdOff=DST_SET[lastK.off]?lastK.off-60:lastK.off;eq=eot(lastK.utc);var lastP=pillarsAt(lastK.utc,mode,sect);var lastSig=[lastP.y,lastP.m,lastP.d,lastP.h].join('/');if(!unique[lastSig]){alternatives.push({label:pad(lastH)+':'+pad(lastM)+' 등 가능 시간',p:[lastP.y,lastP.m,lastP.d,lastP.h]});}branchSamples.push({h:lastH,mi:lastM,utc:lastK.utc,k:lastK,signature:lastSig});stdOff=oldStd;eq=oldEq;}
+      if(!branchSamples.length)return {error:'선택한 시진 안에 계산 가능한 시각이 없습니다. 출생 시각과 당시 시계 변경 이력을 확인하세요.'};
+      if(alternatives.length>1)return {uncertain:true,candidates:alternatives,birthDate:sy+'.'+sm+'.'+sd,reason:branchNames[bi]+'만 알고 계시므로 이 범위에서 가능한 명식을 함께 보여드립니다. 날짜 경계와 선택한 시간 기준에 따라 달라지며, 하나를 임의로 확정하지 않습니다.'};
+      var representative=branchSamples[Math.floor(branchSamples.length/2)];
+      hh=representative.h;mi=representative.mi;utc=representative.utc;k=representative.k;
+      isDst=!!DST_SET[k.off];stdOff=isDst?k.off-60:k.off;eq=eot(utc);
+      branchMeta=branchNames[bi]+' (시각 미상 · 해당 2시간대의 명식 일치)';
+      known=true;
+    }
     var P = pillarsAt(utc, mode, sect);
     var aw = wall(appliedMs(mode, utc));
     var diffMin = Math.round((appliedMs(mode, utc) - (utc + k.off * 60000)) / 60000);
-    var warns = [], alts = [];
+    var warns = [], alts = []; if(branchMeta)warns.push({lv:'mid',t:'시진만 알고 있음',m:branchMeta+'입니다. 2시간대의 대표 시각을 임시로 사용했으며, 대운 시작 날짜는 정확한 출생시각을 알아야 확정할 수 있습니다.'});
     // 절기 경계
     var lun = Solar.fromYmdHms.apply(null, (function (w) { return [w.y, w.m, w.d, w.h, w.mi, w.s]; })(wall(utc + 480 * 60000))).getLunar();
     var pj = lun.getPrevJie(false), nj = lun.getNextJie(false);
@@ -425,17 +485,17 @@ var SJ = (function () {
 
     var pil = [P.y, P.m, P.d, known ? P.h : null];
     var res = analyze(pil, inp);
-    res.calc = { solar: [sy, sm, sd], input: known ? pad(hh) + ':' + pad(mi) : '모름', applied: known ? aw.y+'.'+pad(aw.m)+'.'+pad(aw.d)+' '+pad(aw.h) + ':' + pad(aw.mi) : '-', diff: diffMin, mode: mode, sect: sect, dst: isDst, off: k.off, lon: lon, jie: jieInfo, eot: Math.round(eq) };
+    res.calc = { solar: [sy, sm, sd], input: branchMeta ? branchMeta : (known ? pad(hh) + ':' + pad(mi) : '모름'), applied: known ? aw.y+'.'+pad(aw.m)+'.'+pad(aw.d)+' '+pad(aw.h) + ':' + pad(aw.mi) : '-', diff: diffMin, mode: mode, sect: sect, dst: isDst, off: k.off, lon: lon, jie: jieInfo, eot: Math.round(eq) };
     res.warns = warns; res.alts = alts; res.calcStatus=(warns.some(function(w){return w.lv==='hi';})?'경계 재확인 필요':'프로그램 산출·외부 미대조');
     // 대운
     if (inp.gender === 'M' || inp.gender === 'F') {
       try {
         var yun = P.bj.getYun(inp.gender === 'M' ? 1 : 0, 2);
         var ss0 = yun.getStartSolar();
-        res.daeun = { estimated: !known || mode !== 'std', forward: yun.isForward(), sy: yun.getStartYear(), sm: yun.getStartMonth(), sd: yun.getStartDay(), start: ss0.toYmd(), list: yun.getDaYun(11).slice(1).map(function (d) { var ix = gzIdx(d.getGanZhi()); return { gz: d.getGanZhi(), g: ix[0], z: ix[1], year: d.getStartYear(), startDate: (function(i){var year=ss0.getYear()+i*10;var mm=ss0.getMonth(),day=ss0.getDay();var maxD=new Date(Date.UTC(year,mm,0)).getUTCDate();return year+'-'+pad(mm)+'-'+pad(Math.min(day,maxD));})(d.getStartYear()===ss0.getYear()?0:Math.max(0,Math.round((d.getStartYear()-ss0.getYear())/10))), age: d.getStartYear() - sy }; }) };
+        res.daeun = { estimated: !known || !!branchMeta || mode !== 'std', forward: yun.isForward(), sy: yun.getStartYear(), sm: yun.getStartMonth(), sd: yun.getStartDay(), start: ss0.toYmd(), list: yun.getDaYun(11).slice(1).map(function (d) { var ix = gzIdx(d.getGanZhi()); return { gz: d.getGanZhi(), g: ix[0], z: ix[1], year: d.getStartYear(), startDate: (function(i){var year=ss0.getYear()+i*10;var mm=ss0.getMonth(),day=ss0.getDay();var maxD=new Date(Date.UTC(year,mm,0)).getUTCDate();return year+'-'+pad(mm)+'-'+pad(Math.min(day,maxD));})(d.getStartYear()===ss0.getYear()?0:Math.max(0,Math.round((d.getStartYear()-ss0.getYear())/10))), age: d.getStartYear() - sy }; }) };
       } catch (e) { res.daeun = null; }
     }
-    if (res.daeun && !known) { res.warns.push({lv:'mid',t:'대운 시점 추정',m:'정오 임시 시각으로 산출한 시작일입니다. 정확한 출생시각을 모르면 시작일은 달라질 수 있습니다.'}); res.daeun.startApprox = true; } if (res.daeun && mode !== 'std') { res.warns.push({lv:'mid',t:'대운 계산 기준',m:'원국의 시주에는 선택한 태양시 보정을 적용했습니다. 대운 시작일은 출생 당시 시계 시각과 절입 사이의 시간 간격으로 별도 산출하므로, 서로 다른 계산 기준을 혼동하지 마세요. 외부 만세력과 교차 대조 전입니다.'}); } res.birthYear = sy;
+    if (res.daeun && (!known || branchMeta)) { res.warns.push({lv:'mid',t:'대운 시점 추정',m:branchMeta?'시진 안의 대표 시각으로 산출한 대운 시작일입니다. 실제 출생시각에 따라 달라질 수 있습니다.':'정오 임시 시각으로 산출한 시작일입니다. 정확한 출생시각을 모르면 시작일은 달라질 수 있습니다.'}); res.daeun.startApprox = true; } if (res.daeun && mode !== 'std') { res.warns.push({lv:'mid',t:'대운 계산 기준',m:'원국의 시주에는 선택한 태양시 보정을 적용했습니다. 대운 시작일은 출생 당시 시계 시각과 절입 사이의 시간 간격으로 별도 산출하므로, 서로 다른 계산 기준을 혼동하지 마세요. 외부 만세력과 교차 대조 전입니다.'}); } res.birthYear = sy;
     return res;
   }
   function pad(n) { return (n < 10 ? '0' : '') + n; }
@@ -622,6 +682,7 @@ if (typeof module !== 'undefined') module.exports = TX;
 
 
   // ---------- 입력 화면 ----------
+  function updateBirthTimeMode(){var mode=segVal('birthTimeMode')||'exact';$('#exactTimeWrap').style.display=mode==='exact'?'block':'none';$('#branchTimeWrap').style.display=mode==='branch'?'block':'none';$('#unknownTimeWrap').style.display=mode==='unknown'?'block':'none';$('#tUnknown').checked=mode==='unknown';$('#btime').disabled=mode!=='exact';}
   function initForm() {
     var mb=$('#optMbti'); mb.innerHTML += ['I','E'].flatMap(function(a){return ['S','N'].flatMap(function(b){return ['T','F'].flatMap(function(c){return ['J','P'].map(function(d){return '<option value="'+a+b+c+d+'">'+a+b+c+d+'</option>';});});});}).join('');
     renderTraitButtons();$('#traitChoices').onclick=function(e){var b=e.target.closest('button[data-trait]');if(!b)return;var t=b.dataset.trait; if(chosenTraits.includes(t))chosenTraits=chosenTraits.filter(function(x){return x!==t;});else if(chosenTraits.length<5)chosenTraits.push(t);else {toast('성격 단어는 최대 5개까지만 선택할 수 있어요.');return;}renderTraitButtons();};
@@ -630,7 +691,8 @@ if (typeof module !== 'undefined') module.exports = TX;
     sel.onchange = function () { $('#lonRow').style.display = sel.value === 'etc' ? 'flex' : 'none'; };
     document.querySelectorAll('.seg').forEach(function (sg) { sg.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; sg.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed',String(x===b)); }); }); });
     var bd = $('#birth'); bd.addEventListener('input', function () { var v = bd.value.replace(/\D/g, '').slice(0, 8); bd.value = v; $('#birthView').textContent = v.length === 8 ? v.slice(0, 4) + '년 ' + (+v.slice(4, 6)) + '월 ' + (+v.slice(6, 8)) + '일' : '8자리 숫자로 입력 (예: 19850512)'; });
-    $('#tUnknown').onchange = function () { $('#btime').disabled = this.checked; $('#btime').classList.toggle('dim', this.checked); $('#timeWindow').style.display=this.checked?'block':'none'; };
+    
+    $('#birthTimeMode').addEventListener('click',function(e){if(e.target.closest('button'))updateBirthTimeMode();});updateBirthTimeMode();
     $('#go').onclick = submit;
     $('#again').onclick = function () { show('form'); };
     $('#saveBtn').onclick = saveProfile;
@@ -642,18 +704,18 @@ if (typeof module !== 'undefined') module.exports = TX;
   function readForm() {
     var v = $('#birth').value.replace(/\D/g, '');
     if (v.length !== 8) return { err: '생년월일 8자리를 입력해 주세요. (예: 19850512)' };
-    var unk = $('#tUnknown').checked, t = $('#btime').value; if (segVal('gender') === null || segVal('gender') === undefined) return {err:'성별 또는 선택 안 함을 명시적으로 선택하세요.'}; if (!$('#city').value) return {err:'한국 내 출생 도시를 선택하세요.'};
-    if (!unk && !t) return { err: '태어난 시간을 입력하거나 “시간 모름”을 선택해 주세요.' };
+    var timeKind = segVal('birthTimeMode') || 'exact', unk = timeKind === 'unknown', isBranch = timeKind === 'branch', t = $('#btime').value; if (segVal('gender') === null || segVal('gender') === undefined) return {err:'성별 또는 선택 안 함을 명시적으로 선택하세요.'}; if (!$('#city').value) return {err:'한국 내 출생 도시를 선택하세요.'};
+    if (timeKind === 'exact' && !t) return { err: '정확한 시각을 입력하거나 태어난 시(時), 시간 모름을 선택해 주세요.' }; if (isBranch && $('#branchTime').value==='') return { err: '태어난 시진을 선택해 주세요. (예: 자시)' };
     var lon = $('#city').value === 'etc' ? parseFloat($('#lon').value) : parseFloat($('#city').value);
     if (!(lon >= 124 && lon <= 132)) return { err: '한국 내 경도 124~132 범위로 입력해 주세요. (예: 128.68)' };
     var city = $('#city').value === 'etc' ? '경도 ' + lon : $('#city').selectedOptions[0].text;
-    return { name: $('#name').value.trim(), gender: segVal('gender'), cal: segVal('cal'), y: +v.slice(0, 4), m: +v.slice(4, 6), d: +v.slice(6, 8), timeKnown: !unk, timeRange: unk ? $('#timeRange').value : 'known', h: unk ? 12 : +t.split(':')[0], mi: unk ? 0 : +t.split(':')[1], lon: lon, city: city, timeMode: $('#tmode').value, overlapChoice: $('#overlapChoice').value, zi: +$('#zi').value, extra: extraInfo() };
+    return { name: $('#name').value.trim(), gender: segVal('gender'), cal: segVal('cal'), y: +v.slice(0, 4), m: +v.slice(4, 6), d: +v.slice(6, 8), timeKnown: !unk, timeKind: timeKind, branch: isBranch ? +$('#branchTime').value : null, timeRange: unk ? $('#timeRange').value : 'known', h: unk || isBranch ? 12 : +t.split(':')[0], mi: unk || isBranch ? 0 : +t.split(':')[1], lon: lon, city: city, timeMode: $('#tmode').value, overlapChoice: $('#overlapChoice').value, zi: +$('#zi').value, extra: extraInfo() };
   }
   function fillForm(inp) {
     $('#name').value = inp.name || ''; setSeg('gender', inp.gender); setSeg('cal', inp.cal);
     $('#birth').value = '' + inp.y + p2(inp.m) + p2(inp.d); $('#birth').dispatchEvent(new Event('input'));
-    $('#tUnknown').checked = !inp.timeKnown; $('#tUnknown').onchange.call($('#tUnknown'));
-    $('#btime').value = inp.timeKnown ? p2(inp.h) + ':' + p2(inp.mi) : ''; $('#timeRange').value=inp.timeRange||'all';
+    var modeOld=inp.timeKind||(inp.timeKnown?'exact':'unknown');setSeg('birthTimeMode',modeOld);updateBirthTimeMode();
+    $('#btime').value = modeOld==='exact' ? p2(inp.h) + ':' + p2(inp.mi) : '';$('#branchTime').value=modeOld==='branch'?String(inp.branch):'';$('#timeRange').value=inp.timeRange||'all';
     var opt = Array.prototype.find.call($('#city').options, function (o) { return o.text === inp.city; });
     if (opt) $('#city').value = opt.value; else { $('#city').value = 'etc'; $('#lon').value = inp.lon; }
     $('#city').onchange(); $('#tmode').value = inp.timeMode || 'std'; $('#overlapChoice').value=inp.overlapChoice||'ask'; $('#zi').value = inp.zi||1; restoreExtra(inp.extra);
@@ -691,7 +753,7 @@ if (typeof module !== 'undefined') module.exports = TX;
   }
   function openList() {
     var list = store(), box = $('#sheetBody'); if(state.storageWarning) toast(state.storageWarning);
-    box.innerHTML = list.length ? list.map(function (x, i) { return '<div class="prow"><button class="pload" data-i="' + i + '"><b>' + esc(x.name) + '</b><small>' + x.inp.y + '.' + x.inp.m + '.' + x.inp.d + ' · ' + (x.inp.timeKnown ? p2(x.inp.h) + ':' + p2(x.inp.mi) : '시간모름') + ' · ' + esc(x.inp.city || '지역 미상') + '</small></button><button class="pdel" data-i="' + i + '" aria-label="삭제">✕</button></div>'; }).join('') + '<button class="btn ghost full" id="wipe">전체 삭제</button>' : '<p class="muted">저장된 사람이 없습니다. 결과 화면에서 “저장”을 누르면 가족·지인을 보관할 수 있어요.</p>';
+    box.innerHTML = list.length ? list.map(function (x, i) { return '<div class="prow"><button class="pload" data-i="' + i + '"><b>' + esc(x.name) + '</b><small>' + x.inp.y + '.' + x.inp.m + '.' + x.inp.d + ' · ' + (x.inp.timeKind==='branch'?(['자시','축시','인시','묘시','진시','사시','오시','미시','신시','유시','술시','해시'][x.inp.branch]||'시진'):x.inp.timeKnown ? p2(x.inp.h) + ':' + p2(x.inp.mi) : '시간모름') + ' · ' + esc(x.inp.city || '지역 미상') + '</small></button><button class="pdel" data-i="' + i + '" aria-label="삭제">✕</button></div>'; }).join('') + '<button class="btn ghost full" id="wipe">전체 삭제</button>' : '<p class="muted">저장된 사람이 없습니다. 결과 화면에서 “저장”을 누르면 가족·지인을 보관할 수 있어요.</p>';
     box.onclick = function (e) {
       var b = e.target.closest('button'); if (!b) return; var l = store();
       if (b.classList.contains('pload')) { var x = l[+b.dataset.i]; x.inp._profileId=x.id; fillForm(x.inp); var r = SJ.calc(x.inp); if (!r.error) { state.inp = x.inp; state.r = r; state.year = NOW; state.tab = 'sum'; renderResult(); show('result'); } else { toast('저장 자료를 계산하지 못했습니다: '+r.error); return; } $('#sheet').classList.remove('open'); }
@@ -705,6 +767,135 @@ if (typeof module !== 'undefined') module.exports = TX;
   // ---------- 결과 ----------
   var TABS = [['sum', '요약'], ['chart', '명식'], ['me', '성향'], ['profile', '나를 더 알기'], ['dae', '대운'], ['year', '연운'], ['month', '월운'], ['work', '일·재물'], ['rel', '관계'], ['gung', '궁합'], ['ai', 'AI 심층'], ['words', '쉬운 용어']];
   var easyOn = true;
+
+  // v3.6: 모든 주요 해석 데이터 바로 아래에 결과 맞춤형 쉬운 뜻을 붙이는 표시 전용 모듈.
+  // 명리 계산 엔진의 반환값·용신·시주·대운 산식은 절대 변경하지 않음.
+  var CHILD_WORDS = {
+    '식상생재':'내가 만든 것과 배운 것을 돈과 연결해 보는 옛날식 표현',
+    '관인상생':'규칙을 지키는 모습과 배우는 태도가 서로 돕는다고 보는 표현',
+    '재다신약':'돈과 관련된 상징이 나를 돕는 상징보다 크게 계산된 모습',
+    '군겁쟁재':'내 것과 남의 것을 나누는 문제를 점검하라는 옛날식 표현',
+    '득령':'태어난 계절이 나를 나타내는 글자에 힘을 주는지 보는 것',
+    '득지':'태어난 날의 아래 글자가 나를 나타내는 글자를 돕는지 보는 것',
+    '득세':'주변 글자들이 나를 나타내는 글자를 돕는지 보는 것',
+    '통근':'글자가 아래쪽 글자에 뿌리를 내렸다고 보는 것',
+    '투출':'아래쪽에 숨어 있는 글자가 위쪽에도 나타난 것',
+    '12운성':'하나의 기운을 자라남·활동·쉬어감 같은 단계로 나타낸 전통 표',
+    '지장간':'땅의 글자 안에 숨어 있다고 보는 작은 글자',
+    '십성':'나를 나타내는 글자와 다른 글자의 관계에 붙인 열 가지 이름',
+    '천충지충':'위쪽 글자와 아래쪽 글자에서 함께 부딪힘이 나타난다고 보는 것',
+    '공망':'전통 규칙에서 일부 글자가 비어 있다고 이름 붙인 것',
+    '신살':'오래된 명리학에서 사용하는 상징적인 별명',
+    '순행':'열두 달의 글자가 나아가는 방향으로 10년 구간을 세는 방식',
+    '역행':'열두 달의 글자를 거꾸로 세며 10년 구간을 만드는 방식',
+    '대운수':'첫 번째 10년 구간이 시작된다고 계산한 나이',
+    '평균태양시':'출생지의 동서 위치를 고려해 시계 시간을 고친 값',
+    '진태양시':'동서 위치에 더해 해의 움직임 차이까지 계산한 시간',
+    '입춘':'봄이 시작된다고 정한 절기이며, 명리학에서 한 해의 경계로 쓰는 시점',
+    '절기':'한 해를 계절의 흐름에 따라 나눈 기준 시점',
+    '용신':'사주의 균형을 설명할 때 참고하는 전통 명리학의 이름',
+    '격국':'태어난 달을 기준으로 명식의 특징을 나눈 전통 분류',
+    '세운':'한 해의 글자를 나의 출생 글자와 비교하는 방법',
+    '월운':'약 한 달의 글자를 나의 출생 글자와 비교하는 방법',
+    '대운':'인생을 약 10년씩 나누어 살펴보는 명리학의 구간',
+    '일간':'태어난 날의 위쪽 글자로, 명리학에서 나를 상징하는 것',
+    '신강':'나를 돕는 글자의 비중이 상대적으로 높다고 분류한 것',
+    '신약':'나를 돕는 글자의 비중이 상대적으로 낮다고 분류한 것',
+    '중화':'나를 돕는 쪽과 다른 쪽이 비교적 비슷하다고 분류한 것',
+    '비겁':'나와 비슷한 관계에 있는 글자들의 묶음',
+    '식상':'내가 바깥으로 표현하거나 만들어 낸다고 보는 글자들의 묶음',
+    '재성':'돈이나 관리와 연결해 부르는 전통적인 글자들의 묶음',
+    '관성':'규칙과 책임에 연결해 부르는 글자들의 묶음',
+    '인성':'배움과 도움에 연결해 부르는 글자들의 묶음'
+  };
+  var CHILD_SS = {
+    '비견':['나와 비슷한 사람, 협력과 내 의견의 균형','모둠 활동에서 내 몫과 친구 몫을 나눠 보세요.'],
+    '겁재':['함께 경쟁하거나 나누는 관계를 나타내는 상징','내가 원하는 것과 친구가 원하는 것이 다를 때 대화해 보세요.'],
+    '식신':['천천히 만들고 표현하는 모습을 나타내는 상징','배운 내용을 그림이나 글로 한 가지 만들어 보세요.'],
+    '상관':['새로운 생각을 말하고 질문하는 모습을 나타내는 상징','의견이 달라도 상대방의 말부터 들어 보세요.'],
+    '편재':['새로운 기회나 여러 일을 살펴본다는 전통적 상징','새로운 일을 시작하기 전 필요한 것부터 적어 보세요.'],
+    '정재':['하나씩 모으고 꾸준히 관리하는 모습을 떠올리는 상징','용돈을 받을 때 쓴 돈을 적어 보는 것과 비슷해요.'],
+    '편관':['힘든 상황에서 규칙과 책임을 생각하는 전통적 상징','할 일이 많으면 순서를 정해 하나씩 해 보세요.'],
+    '정관':['약속과 규칙을 중요하게 여긴다고 보는 상징','학급 약속을 함께 지키는 상황을 떠올려 보세요.'],
+    '편인':['다른 방식으로 배우고 생각하는 모습을 떠올리는 상징','익숙하지 않은 문제를 새로운 방식으로 풀어 보세요.'],
+    '정인':['배우고 도움을 주고받는 모습을 떠올리는 상징','친구에게 배운 방법을 나도 설명해 보세요.']
+  };
+  var CHILD_TAG = {
+    '활용':'이 프로그램은 이 구간을 무언가 해 볼 주제로 분류했어요. 실제 성공을 약속하지는 않아요.',
+    '정비':'지금 하는 일을 살펴보고 정리하는 주제로 읽어 보세요. 운이 나쁘다는 뜻이 아니에요.',
+    '점검':'서두르지 않고 계획과 약속을 한 번 더 확인하라는 참고 표시예요. 사고를 예언하는 말이 아니에요.'
+  };
+  function childPlain(s){return String(s||'').replace(/\s+/g,' ').trim();}
+  function childSelectTerm(s){
+    var keys=Object.keys(CHILD_WORDS).sort(function(a,b){return b.length-a.length;});
+    for(var i=0;i<keys.length;i++)if(s.indexOf(keys[i])>=0)return keys[i];
+    return '';
+  }
+  function childInterpret(label, value, scope){
+    var t=childPlain(label), v=childPlain(value), term=childSelectTerm(t+' '+v), result=null, task=null;
+    var ss=Object.keys(CHILD_SS).find(function(k){return t.indexOf(k)>=0;});
+    if(/MBTI/.test(t)){result='이 네 글자는 본인이 선택한 생각하고 행동하는 방식의 이름이에요. 반드시 이런 사람이라는 뜻은 아니에요.';task='친구들과 있을 때와 혼자 있을 때, 어떤 모습이 더 편한지 떠올려 보세요.';}
+    else if(/혈액형|별자리/.test(t)){result='혈액형이나 별자리로 성격을 알아맞힐 수는 없어요. 재미있는 이야기로만 읽으세요.';task='내가 어떤 사람인지는 실제 행동과 경험으로 알아보세요.';}
+    else if(/내가 생각하는 나|중요한 가치|결정하는 방식/.test(t)){result='여기는 사주가 알아낸 사실이 아니라 내가 직접 골라 알려 준 내용을 보여줘요.';task='최근 이 모습이 드러난 일을 하나 떠올려 보세요.';}
+    else if(/기본 사고방식|강점|과할 때|스트레스|사회적 얼굴|의사결정|리더십|변화 적응|성장 팁/.test(t)){result='이 문장은 태어난 글자들로 성격을 비유해 본 거예요. 진짜 성격을 정하는 검사는 아니에요.';task=/스트레스|과할 때/.test(t)?'힘들 때 내가 보이는 행동을 생각하고, 쉬는 방법 하나를 적어 보세요.':/리더십/.test(t)?'모둠에서 내가 먼저 나서는지, 친구를 도와주는지 떠올려 보세요.':'나에게 맞았던 경험 한 가지와 맞지 않았던 경험 한 가지를 떠올려 보세요.';}
+    else if(/재성 구조|돈 버는 스타일|재물 포인트|돈|재물|지출|투자|수입/.test(t)){result='돈과 연결해서 부르는 옛날식 이름을 풀이한 것이에요. 실제 수입이나 투자 결과를 알려 주지는 않아요.';task='용돈기입장처럼 들어오는 돈과 나가는 돈을 확인해 보세요.';}
+    else if(/직업|직무|격국으로 본 무기|일하는 방식|조직 vs 독립|승진|이직|창업/.test(t)){result='일할 때 어떤 태도를 떠올릴 수 있는지 적은 전통적 해석이에요. 잘 맞는 직업을 확정하는 말은 아니에요.';task='내가 좋아하는 일, 잘해 본 일, 더 배우고 싶은 일을 각각 하나씩 적어 보세요.';}
+    else if(/갈등|관계 맺는|배우자|연애|결혼|도화|소통|가족|부모|형제|자녀|인연/.test(t)){result='사람과 어울리는 모습을 옛날 글자로 설명해 보는 것이에요. 다른 사람의 마음이나 미래는 알 수 없어요.';task='가까운 사람에게 고마웠던 일을 한 가지 말해 보세요.';}
+    else if(/천간|지지/.test(t)&&/년|연/.test(scope)){result='올해를 나타내는 두 글자 가운데 하나를, 내 태어난 글자와 비교한 것이에요.';task='올해 내가 지키고 싶은 약속 하나를 정해 보세요.';}
+    else if(/현재 대운|전반 5년|후반 5년|직전 대운|다음 대운/.test(t)){result='약 10년의 긴 구간을 나누어 설명한 전통적 해석이에요. 5년 뒤에 정해진 일이 생긴다는 뜻은 아니에요.';task='앞으로 몇 년 동안 배우고 싶은 것을 생각해 보세요.';}
+    else if(/오행|기운|십성|강약|용신|격국|지장간|공망/.test(t)){result='태어난 날짜를 옛날의 다섯 가지 자연 상징과 여러 관계 이름으로 풀이한 내용이에요.';task='계산된 숫자나 이름이 나의 능력이나 성격 점수는 아니라는 점을 기억하세요.';}
+    else if(/핵심|성향|요약/.test(t)){result='위 문장은 여러 전통적 상징을 한 번에 짧게 모은 말이에요. 나를 단정하는 정답은 아니에요.';task='내 경험과 맞는 부분에는 표시하고, 다른 부분은 그대로 남겨 두세요.';}
+    else if(ss){result='‘'+ss+'’은 '+CHILD_SS[ss][0]+'이에요.';task=CHILD_SS[ss][1];}
+    else {result='위 내용은 사주 글자들 사이의 관계를 옛날 방식으로 풀이한 말이에요. 실제로 일어날 일을 정해 주지는 않아요.';task='내 생활에서 비슷했던 일과 달랐던 일을 한 가지씩 떠올려 보세요.';}
+    if(term && t!==term){result+=' 여기 나온 ‘'+term+'’은 '+CHILD_WORDS[term]+'이에요.';}
+    var tag=Object.keys(CHILD_TAG).find(function(k){return v.indexOf(k)>=0;});
+    if(tag && /년|운|대운|구간/.test(scope+' '+t))result+=' '+CHILD_TAG[tag];
+    return [result,task];
+  }
+  function childAdd(parent,label,value,scope){
+    if(parent.querySelector(':scope > .easy-detail'))return;
+    var note=childInterpret(label,value,scope);
+    var d=document.createElement('details');d.className='easy-detail';d.hidden=!easyOn;
+    var sum=document.createElement('summary');sum.textContent='🌱 이 결과를 쉽게 풀이하면';d.appendChild(sum);
+    var p=document.createElement('p');p.textContent=note[0];d.appendChild(p);
+    var q=document.createElement('p');q.className='easy-action';q.textContent='💡 생활 속에서: '+note[1];d.appendChild(q);
+    parent.appendChild(d);
+  }
+  function childEnrich(root){
+    if(!root)return;
+    root.querySelectorAll('.card').forEach(function(card){
+      var title=childPlain((card.querySelector('h3')||{}).textContent), list=card.querySelectorAll('.kv');
+      list.forEach(function(k){var b=k.querySelector(':scope > b'), v=k.querySelector(':scope > div');if(b&&v)childAdd(k,b.textContent,v.textContent,title);});
+      // 개별 값 표도 쉬운 설명을 볼 수 있도록 설명을 인접 배치합니다.
+      card.querySelectorAll('.bar').forEach(function(b){childAdd(b,'오행 그래프',b.textContent,title);});
+      card.querySelectorAll('.rel').forEach(function(x){childAdd(x,'글자 사이의 합충',x.textContent,title);});
+      card.querySelectorAll('.dcard').forEach(function(d){childAdd(d,'10년 대운 카드',d.textContent,title);});
+      card.querySelectorAll('.yb').forEach(function(y){childAdd(y,'억부·조후 참고 기운',y.textContent,title);});
+      card.querySelectorAll('.gauge').forEach(function(g){childAdd(g,'일간 강약 그래프',g.textContent,title);});
+      card.querySelectorAll('.m3').forEach(function(m){childAdd(m,'월별 일·돈·관계',m.textContent,'월운');});
+      card.querySelectorAll('.g3 > div').forEach(function(g){childAdd(g,(g.querySelector('h4')||{}).textContent,g.textContent,title);});
+      card.querySelectorAll('.cmp > div').forEach(function(c){childAdd(c,'시기 비교',c.textContent,title);});
+      if(title.indexOf('10년 비교')>=0){card.querySelectorAll('.yt tr').forEach(function(tr){childAdd(tr.cells[3]||tr,'해당 연도',tr.textContent,title);});}
+      if(title.indexOf('사주 원국표')>=0){childAdd(card,'원국표 읽는 방법',card.textContent,title);}
+      // 설명이 하나도 없는 카드에는 카드 전체의 뜻을 보충합니다.
+      if(!list.length && !card.querySelector('.easy-detail') && !card.classList.contains('mcard') && !/프롬프트|궁합 비교/.test(title)){
+        childAdd(card,title,card.textContent.slice(0,500),title);
+      }
+    });
+    // 월별 카드 12장: 각 달마다 다른 십성을 실제 값으로 풀이합니다.
+    root.querySelectorAll('.mcard').forEach(function(c){
+      var b=c.querySelector('.mh b'), st=c.querySelector('.mb span'), tag=(c.querySelector('.tag')||{}).textContent||'';
+      var title=b?childPlain(b.textContent):'이번 달';
+      var s=st?st.textContent.split('·'):[], names=s.map(function(k){var p=CHILD_SS[k];return p?k+'는 '+p[0]+'이라는 뜻이에요.':'';}).filter(Boolean);
+      var note=c.querySelector(':scope > .easy-month');if(note)return;
+      var d=document.createElement('details');d.className='easy-detail easy-month';d.hidden=!easyOn;
+      var sm=document.createElement('summary');sm.textContent='🌱 '+title+' 쉬운 월운 해설';d.appendChild(sm);
+      var p=document.createElement('p');p.textContent=(names.join(' ')||'이 달의 두 글자를 태어난 글자와 비교해 보는 거예요. ')+ ' '+(Object.keys(CHILD_TAG).find(function(k){return tag.includes(k)})?CHILD_TAG[Object.keys(CHILD_TAG).find(function(k){return tag.includes(k)})]:'이것만으로 미래 일을 예측할 수는 없어요.');d.appendChild(p);
+      var q=document.createElement('p');q.className='easy-action';q.textContent='💡 생활 속에서: 이 달에 하고 싶은 일 하나를 정하고, 마지막에 내가 해 본 일을 돌아보세요.';d.appendChild(q);
+      c.appendChild(d);
+    });
+  }
+
   function renderResult() {
     if(state.r.uncertain){renderUncertain();return;}
     var nav = $('#tabs'); nav.innerHTML = TABS.map(function (t) { return '<button role="tab" aria-selected="' + (t[0] === state.tab) + '" data-t="' + t[0] + '"' + (t[0] === state.tab ? ' class="on"' : '') + '>' + t[1] + '</button>'; }).join('');
@@ -713,7 +904,8 @@ if (typeof module !== 'undefined') module.exports = TX;
     if(state.tab==='ai'){var q=$('#aiQ'),lv=$('#aiLv'),txt=$('#aiTxt'); if(q)state.aiQ=q.value;if(lv)state.aiLv=lv.value;if(txt)state.aiTxt=txt.value;}
     $('#panel').innerHTML = josa(({ sum: tSum, chart: tChart, me: tMe, profile: tProfile, dae: tDae, year: tYear, month: tMonth, work: tWork, rel: tRel, gung: tGung, ai: tAi, words: tWords })[state.tab]());
     $('#hero').innerHTML = josa($('#hero').innerHTML);
-    var sw = $('#easyToggle'); if (sw) {sw.hidden=false;sw.setAttribute('aria-pressed',String(easyOn));sw.textContent=easyOn?'쉬운 해설 켜짐':'쉬운 해설 꺼짐';sw.onclick=function(){easyOn=!easyOn;document.querySelectorAll('.easy-note,.easy-personal').forEach(function(x){x.hidden=!easyOn;});sw.setAttribute('aria-pressed',String(easyOn));sw.textContent=easyOn?'쉬운 해설 켜짐':'쉬운 해설 꺼짐';};}
+    childEnrich($('#panel'));
+    var sw = $('#easyToggle'); if (sw) {sw.hidden=false;sw.setAttribute('aria-pressed',String(easyOn));sw.textContent=easyOn?'쉬운 해설 켜짐':'쉬운 해설 꺼짐';sw.onclick=function(){easyOn=!easyOn;document.querySelectorAll('.easy-note,.easy-personal,.easy-detail').forEach(function(x){x.hidden=!easyOn;});sw.setAttribute('aria-pressed',String(easyOn));sw.textContent=easyOn?'쉬운 해설 켜짐':'쉬운 해설 꺼짐';};}
     bindPanel();
   }
   function josa(h) {
@@ -1099,6 +1291,8 @@ if (typeof module !== 'undefined') module.exports = TX;
       sections.forEach(function(item,i){h+='<section class="print-section"><h2>'+item[0]+'</h2>'+josa(item[1]())+'</section>';});}
     h+='<div class="footnote">전통 명리학에 따른 참고용 해석이며 과학적으로 검증된 미래 예측이 아닙니다. MBTI 등 추가 성향 정보는 자기보고 또는 재미용 분류로, 만세력 계산에 반영되지 않습니다. 개인 출생정보가 포함되어 있으므로 공유 시 주의하세요.</div>';
     p.innerHTML=h;
+    childEnrich(p);
+    p.querySelectorAll('.easy-detail').forEach(function(d){d.hidden=false;});
     p.querySelectorAll('details').forEach(function(d){d.open=true;});
     try{window.print();}catch(e){toast('인쇄 화면을 열지 못했습니다. 브라우저 메뉴에서 인쇄를 선택해 주세요.');}
   }
