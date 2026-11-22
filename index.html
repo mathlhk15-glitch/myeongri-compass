@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#18214A">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600;700&family=Noto+Serif+KR:wght@700;900&display=swap" rel="stylesheet">
-<title>명리 나침반 — 한눈에 보는 내 운세 v5.2 시험판</title>
+<title>명리 나침반 — 한눈에 보는 내 운세 v5.3 시험판</title>
 <style>
 :root{--ink:#1d2433;--paper:#f7f3ea;--card:#fffdf8;--line:#e6dfcf;--muted:#7b7465;--gold:#b8892e;
 --c0:#2f8f5b;--c1:#d9483b;--c2:#c08a1e;--c3:#7d8794;--c4:#2b4c7e}
@@ -747,7 +747,7 @@ details#moreAboutMe{border-radius:6px!important}
    <div class="print-tools"><button type="button" class="btn ghost" id="printSum">요약 보고서 인쇄</button><button type="button" class="btn ghost" id="printAll">전체 보고서 인쇄</button></div>
   <p class="hint">인쇄 화면에서 ‘PDF로 저장’을 고르면 PDF로 남길 수 있어요. 다른 사람에게 보낼 때는 위 ‘운세 보내기’를 이용하세요. 화면이나 보고서를 다른 사람에게 보낼 때는 생년월일과 사적인 질문을 가려 주세요.</p>
  </div>
- <p class="foot">명리 나침반 v5.2 시험판 · 만세력 계산: lunar-javascript(절기 천문 계산) · 한국 표준시·서머타임: 한국 시간대 전환표(IANA 자료 기반)<br>해석은 전통 명리의 상징 체계이며, 중요한 결정은 현실 정보와 전문가 판단을 우선하세요.</p>
+ <p class="foot">명리 나침반 v5.3 시험판 · 만세력 계산: lunar-javascript(절기 천문 계산) · 한국 표준시·서머타임: 한국 시간대 전환표(IANA 자료 기반)<br>해석은 전통 명리의 상징 체계이며, 중요한 결정은 현실 정보와 전문가 판단을 우선하세요.</p>
 </div>
 </main>
 <div id="reportPrint" aria-hidden="true"></div>
@@ -2105,7 +2105,7 @@ if (typeof module !== 'undefined') module.exports = TX;
 
   document.addEventListener('click',function(e){var sb=e.target.closest('[data-story]');if(sb){state.storyStep=+sb.dataset.story;refreshFortune();return;}if(e.target.closest('#shareLuck,#shareLuckMain')){return;}var back=e.target.closest('#backToMenu');if(back){var dest=$('#fortuneMenu');if(dest)dest.scrollIntoView({behavior:'smooth',block:'start'});return;}var b=e.target.closest('.mt[data-m]');if(b){state.menu=b.dataset.m;if(state.menu==='next')state.storyStep=0;if(state.menu==='today')state.dayOff=0;refreshFortune();var el=$('#fortuneView');if(el){var top=el.getBoundingClientRect().top+window.scrollY-110;window.scrollTo({top:top,behavior:'smooth'});}return;}var o=e.target.closest('.fv-day button[data-o]');if(o){state.dayOff=+o.dataset.o;refreshFortune();}});
   function friendHtml(e,size){return '<span class="fr f'+e+'"'+(size?' style="--s:'+size+'px"':'')+' aria-hidden="true"><i class="tp"></i><i class="bd"></i><i class="ck"></i><i class="fc"></i></span>';}
-  function condLine(){var i=state.inp,c=state.r.calc||{},tk=i.timeKind||(i.timeKnown?'exact':'unknown');var tt=tk==='exact'?p2(i.h)+':'+p2(i.mi):tk==='branch'?(['새벽 0~1시','새벽 1~3시','새벽 3~5시','오전 5~7시','오전 7~9시','오전 9~11시','오전 11~오후 1시','오후 1~3시','오후 3~5시','오후 5~7시','오후 7~9시','오후 9~11시','밤 11시~자정'][i.branch]||'시간대'):'시간 모름'+(i.pick?'(후보 선택)':'');return esc((i.gender==='M'?'남성':i.gender==='F'?'여성':'성별 없음')+' · '+(i.cal==='solar'?'양력':i.cal==='lunar'?'음력':'음력 윤달')+' '+i.y+'.'+i.m+'.'+i.d+' · '+tt+' · '+((c.mode||i.timeMode)==='std'?'표준시':(c.mode||i.timeMode)==='mean'?'지역 보정':'진태양시')+(i.noCity||!i.city?'':' · '+i.city)+' · v5.1');}
+  function condLine(){var i=state.inp,c=state.r.calc||{},tk=i.timeKind||(i.timeKnown?'exact':'unknown');var tt=tk==='exact'?p2(i.h)+':'+p2(i.mi):tk==='branch'?(['새벽 0~1시','새벽 1~3시','새벽 3~5시','오전 5~7시','오전 7~9시','오전 9~11시','오전 11~오후 1시','오후 1~3시','오후 3~5시','오후 5~7시','오후 7~9시','오후 9~11시','밤 11시~자정'][i.branch]||'시간대'):'시간 모름'+(i.pick?'(후보 선택)':'');return esc((i.gender==='M'?'남성':i.gender==='F'?'여성':'성별 없음')+' · '+(i.cal==='solar'?'양력':i.cal==='lunar'?'음력':'음력 윤달')+' '+i.y+'.'+i.m+'.'+i.d+' · '+tt+' · '+((c.mode||i.timeMode)==='std'?'표준시':(c.mode||i.timeMode)==='mean'?'지역 보정':'진태양시')+(i.noCity||!i.city?'':' · '+i.city)+' · v5.3');}
   function meCard(r){
     var d=TX.day[r.dg],e=GW[r.dg],nm=esc(state.inp.name||'나'),EN=['나무','불','흙','쇠','물'],EC=['#2FA58F','#E8513F','#F2B634','#ECE9E0','#6C7BC0'];
     var yz=r.p[0].z,mIdx=(r.p[1].z-2+12)%12;
@@ -2542,6 +2542,86 @@ if (typeof module !== 'undefined') module.exports = TX;
     }; }
   }
   document.addEventListener('DOMContentLoaded', initForm);
+})();
+</script>
+<!-- 타로 나침반 안전한 질문 이어보기: 출생정보는 URL/타로로 전송하지 않음 -->
+<style>
+.tarot-bridge-box{background:#f5edff;border:1px solid #d5c1fa;border-radius:12px;padding:14px;margin:14px 0;color:#26375f}
+.tarot-bridge-box h3{font-size:16px;margin:0 0 5px}.tarot-bridge-box p{font-size:13px;margin:5px 0}
+.tarot-bridge-box button{background:#26376b;color:#fff;border:0;padding:12px 18px;border-radius:11px;width:100%;font-size:15px;font-weight:700}
+</style>
+<script>
+(function(){
+'use strict';
+/* v5.3 타로 연결: 질문·오행 친구·요약만 전달(생년월일·출생시간은 보내지 않음). 같은 주소면 저장공간, 다른 주소면 # 주소로 전달 */
+var TARGET_KEY='tarot_compass_target_url_v1';
+var BRIDGE_KEY='tarot_compass_bridge_v1';
+var DEFAULT_TARGET='https://mathlhk15-glitch.github.io/tarot-compass/';
+function target(){var t='';try{t=localStorage.getItem(TARGET_KEY)||''}catch(e){}if(!t||/^tarot_compass_v1_0\.html$/.test(t))t=DEFAULT_TARGET;return t}
+function mount(){
+ var result=document.getElementById('result');
+ if(!result||document.getElementById('tarotBridge'))return;
+ var box=document.createElement('div');box.id='tarotBridge';box.className='tarot-bridge-box';
+ box.innerHTML='<h3>🔮 이 고민, 타로 카드로도 물어볼까요?</h3><p>질문과 내 <b>오행 친구</b>만 타로로 넘어가요. 생년월일·출생시간은 보내지 않아요. 카드는 사주와 상관없이 내가 직접 뽑아요.</p><button type="button" id="goTarotBridge">🔮 타로 나침반에서 이어 보기</button><p><a href="#" id="tarotBridgeSettings" style="font-size:12px">타로 사이트 주소 바꾸기</a></p>';
+ var tools=result.querySelector('.result-tools');if(tools)tools.parentNode.insertBefore(box,tools);else result.appendChild(box);
+ document.getElementById('goTarotBridge').onclick=function(){
+  var q=((document.getElementById('askQuestion')||{}).value||'').trim();
+  var category=(document.getElementById('askCategory')||{}).value||'auto';
+  var topic=({job:'job',work:'job',money:'money',study:'exam',love:'love',people:'friend',health:'health',move:'move',overall:'general'})[category]||'general';
+  var card=document.querySelector('.me-card'),el=null,m=card&&card.className.match(/mg(\d)/);if(m)el=+m[1];
+  var nickEl=document.querySelector('.mc-who b'),nick=nickEl?String(nickEl.textContent||'').trim().slice(0,20):'';
+  var head=document.querySelector('.luck-headline'),theme=head?String(head.textContent||'').replace(/\s+/g,' ').trim().slice(0,80):'';
+  var linkId=Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+  var payload={question:q.slice(0,400),topic:topic,element:el,nick:nick,theme:theme,linkId:linkId,createdAt:Date.now(),source:'saju'};
+  try{localStorage.setItem(BRIDGE_KEY,JSON.stringify(payload));localStorage.removeItem('saju_compass_shared_summary_v1');}catch(e){}
+  var hash='#from=saju&id='+linkId+'&t='+encodeURIComponent(topic)+(el!==null?'&e='+el:'')+(q?'&q='+encodeURIComponent(q.slice(0,300)):'');
+  window.location.href=target().split('#')[0]+hash;
+ };
+ document.getElementById('tarotBridgeSettings').onclick=function(e){e.preventDefault();
+  var url=prompt('타로 나침반 주소를 입력하세요.\n예: https://mathlhk15-glitch.github.io/tarot-compass/',target());
+  if(url===null)return;url=url.trim();if(!url)return;
+  if(/^(javascript|data):/i.test(url)){alert('올바른 주소를 입력해 주세요.');return;}
+  try{localStorage.setItem(TARGET_KEY,url);alert('타로 사이트 주소를 저장했습니다.')}catch(ex){alert('주소를 저장하지 못했습니다.')}
+ };
+}
+function fillQ(text){var inp=document.getElementById('askQuestion');if(inp&&!inp.value&&text){inp.value=String(text).slice(0,400);inp.dispatchEvent(new Event('input',{bubbles:true}));}}
+function importQuestion(){
+ try{var h=new URLSearchParams(location.hash.slice(1));if(h.get('tq')){fillQ(h.get('tq'));history.replaceState(null,'',location.pathname+location.search);}}catch(e){}
+ try{
+  var raw=localStorage.getItem(BRIDGE_KEY);if(!raw)return;
+  var data=JSON.parse(raw);if(!data||data.source!=='tarot')return;
+  if(Date.now()-data.createdAt<=1800000)fillQ(data.question);
+  localStorage.removeItem(BRIDGE_KEY);
+ }catch(e){}
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){mount();importQuestion()});else{mount();importQuestion()}
+})();
+</script>
+
+<style id="compass-cross-nav-style">
+.compass-cross-nav{display:flex;align-items:center;gap:10px;margin:12px 0;padding:12px 13px;background:#f5efff;border:1px solid #d8c7f5;border-radius:12px;color:#25365c;font-family:system-ui,-apple-system,"Malgun Gothic",sans-serif}
+.compass-cross-nav .cross-text{flex:1;min-width:0;line-height:1.45;font-size:13px}
+.compass-cross-nav .cross-text strong{display:block;font-size:14px}
+.compass-cross-nav .cross-text small{display:block;color:#68708a;margin-top:3px}
+.compass-cross-nav .cross-link{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;max-width:48%;padding:11px 10px;background:#5846b2;color:#fff!important;border-radius:9px;font-weight:800;font-size:13px;text-decoration:none;text-align:center;min-height:44px}
+@media(max-width:340px){.compass-cross-nav{flex-wrap:wrap}.compass-cross-nav .cross-link{max-width:none;width:100%}}
+@media print{.compass-cross-nav{display:none!important}}
+</style>
+<script id="compass-cross-nav-init">
+(function(){
+  'use strict';
+  var TAROT_URL='https://mathlhk15-glitch.github.io/tarot-compass/';
+  function create(extra){
+    var p=document.createElement('nav');p.className='compass-cross-nav';p.setAttribute('aria-label','타로 나침반 바로가기');
+    p.innerHTML='<div class="cross-text"><strong>🔮 타로 카드도 뽑아볼까요?</strong><small>'+(extra?'사주 해석을 읽은 다음, 지금의 고민을 타로로 이어 볼 수 있어요.':'생년월일 없이 타로만 가볍게 즐길 수도 있어요.')+'</small></div><a class="cross-link" href="'+TAROT_URL+'">🃏 타로 보러 가기</a>';
+    return p;
+  }
+  function mount(){
+    var form=document.getElementById('form'),result=document.getElementById('result');
+    if(form&&!document.getElementById('crossSajuForm')){var f=create(false);f.id='crossSajuForm';var intro=form.querySelector('.intro');if(intro)intro.insertAdjacentElement('afterend',f);else form.insertBefore(f,form.firstChild);}
+    if(result&&!document.getElementById('crossSajuResult')){var r=create(true);r.id='crossSajuResult';var tabs=result.querySelector('#tabs');if(tabs)tabs.parentNode.insertBefore(r,tabs);else result.appendChild(r);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
 })();
 </script>
 </body>
