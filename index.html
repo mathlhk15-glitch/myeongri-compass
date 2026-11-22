@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#18214A">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600;700&family=Noto+Serif+KR:wght@700;900&display=swap" rel="stylesheet">
-<title>명리 나침반 — 한눈에 보는 내 운세 v5.3 시험판</title>
+<title>명리 나침반 · 세계 운명학 — 통합판 v5.5</title>
 <style>
 :root{--ink:#1d2433;--paper:#f7f3ea;--card:#fffdf8;--line:#e6dfcf;--muted:#7b7465;--gold:#b8892e;
 --c0:#2f8f5b;--c1:#d9483b;--c2:#c08a1e;--c3:#7d8794;--c4:#2b4c7e}
@@ -642,12 +642,22 @@ details#moreAboutMe{border-radius:6px!important}
 @media(max-width:355px){.share-buttons{grid-template-columns:1fr}.share-sheet-inner{padding:12px}}
 @media print{.share-sheet{display:none!important}}
 </style>
+<style id="wa-v55-styles">
+.mc-zodiac{display:inline-block;margin:8px 0 3px;border-radius:8px;padding:5px 10px;background:#f9ecff;color:#6137b1;font-weight:900;font-size:14px;box-shadow:inset 0 0 0 1px #e4c8ff}
+.wa-passport{border-top:4px solid #7765b6}.wa-stamps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:11px 0}.wa-stamps>div{padding:11px 8px;background:#f8f5ff;border:1px dashed #baa9e7;border-radius:11px;min-width:0}.wa-stamps small{display:block;font-size:12px;color:#5b5487}.wa-stamps b{display:block;color:#33295b;font-size:16px;overflow-wrap:anywhere;margin-top:4px}
+.wa-daily{border-radius:12px;padding:13px;background:#f7f4ff;border:1px solid #d8cafa}.wa-daily b{display:block;font-size:14px}.wa-daily strong{display:block;font-size:20px;color:#4e3791}.wa-daily p{margin:6px 0;font-size:14px;line-height:1.8}
+.wa-expand{border:0;margin:12px 0;padding:0}.wa-expand>summary{background:#eeeafd;border-radius:10px;color:#432e87;padding:13px;font-size:15px;font-weight:800}.wa-expand>.wa-box{margin:8px 0}
+.wa-vote{border-top:1px solid #eee4fa;padding-top:12px;margin-top:12px}.wa-vote b{display:block;margin-bottom:5px}.wa-vote p{font-size:13px}.wa-vote button{padding:9px 10px;border:1px solid #c8b9e8;border-radius:9px;background:#f8f4ff;color:#452b84;font-weight:700;margin:4px}.wa-vote small{display:block;color:#625681;margin-top:4px}
+.wa-tiles .wa-tile[hidden]{display:none!important}
+@media(max-width:360px){.wa-stamps{grid-template-columns:1fr}}
+@media print{.wa-vote,.wa-expand>summary{display:none!important}}
+</style>
 </head>
 <body>
 <header><h1><span>命</span>명리 나침반</h1><button id="listBtn">👥 저장한 사람</button></header>
 <main>
 <div id="form">
- <div class="intro"><div class="ring" id="introRing" aria-hidden="true"></div><h2>내 사주는<br>어떤 날씨일까?</h2><p>생일만 넣으면 올해와 내년 운세를 날씨처럼 보여 줘요. 궁금하면 펼쳐서 전문 풀이까지.</p>
+ <div class="intro"><div class="ring" id="introRing" aria-hidden="true"></div><h2>내 사주는<br>어떤 날씨일까?</h2><p>생일을 넣으면 올해·내년 운세는 물론 세계 12가지 탄생 전통도 탐험할 수 있어요. 쉬운 이야기와 생활 속 예시까지!</p>
  <div class="friends" aria-hidden="true"><figure><span class="fr f0" style="--s:50px"><i class="tp"></i><i class="bd"></i><i class="ck"></i><i class="fc"></i></span><figcaption>나무 木</figcaption></figure><figure><span class="fr f1" style="--s:50px"><i class="tp"></i><i class="bd"></i><i class="ck"></i><i class="fc"></i></span><figcaption>불 火</figcaption></figure><figure><span class="fr f2" style="--s:50px"><i class="tp"></i><i class="bd"></i><i class="ck"></i><i class="fc"></i></span><figcaption>흙 土</figcaption></figure><figure><span class="fr f3" style="--s:50px"><i class="tp"></i><i class="bd"></i><i class="ck"></i><i class="fc"></i></span><figcaption>쇠 金</figcaption></figure><figure><span class="fr f4" style="--s:50px"><i class="tp"></i><i class="bd"></i><i class="ck"></i><i class="fc"></i></span><figcaption>물 水</figcaption></figure></div>
  <div class="bubble">너는 우리 중 누구랑 닮았을까?</div></div>
  <section class="card">
@@ -747,7 +757,7 @@ details#moreAboutMe{border-radius:6px!important}
    <div class="print-tools"><button type="button" class="btn ghost" id="printSum">요약 보고서 인쇄</button><button type="button" class="btn ghost" id="printAll">전체 보고서 인쇄</button></div>
   <p class="hint">인쇄 화면에서 ‘PDF로 저장’을 고르면 PDF로 남길 수 있어요. 다른 사람에게 보낼 때는 위 ‘운세 보내기’를 이용하세요. 화면이나 보고서를 다른 사람에게 보낼 때는 생년월일과 사적인 질문을 가려 주세요.</p>
  </div>
- <p class="foot">명리 나침반 v5.3 시험판 · 만세력 계산: lunar-javascript(절기 천문 계산) · 한국 표준시·서머타임: 한국 시간대 전환표(IANA 자료 기반)<br>해석은 전통 명리의 상징 체계이며, 중요한 결정은 현실 정보와 전문가 판단을 우선하세요.</p>
+ <p class="foot">명리 나침반 v5.4 통합판 · 만세력 계산: lunar-javascript(절기 천문 계산) · 한국 표준시·서머타임: 한국 시간대 전환표(IANA 자료 기반)<br>해석은 전통 명리의 상징 체계이며, 중요한 결정은 현실 정보와 전문가 판단을 우선하세요.</p>
 </div>
 </main>
 <div id="reportPrint" aria-hidden="true"></div>
@@ -768,6 +778,218 @@ details#moreAboutMe{border-radius:6px!important}
   </div>
 </div>
 <div id="toast" role="status" aria-live="polite"></div>
+<style id="world-destiny-styles">
+/* World Destiny Atlas — scoped styles */
+#tabs .mode-tabs{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+#tabs .mode-tab{font-size:13px;padding:12px 3px}
+#tabs .mode-tab[data-mode="world"].on{background:#55449b;border-color:#55449b}
+.wa{font-family:"IBM Plex Sans KR",-apple-system,"Malgun Gothic",sans-serif;overflow-wrap:anywhere;line-height:1.72;color:#24304d}
+.wa h2,.wa h3{font-family:"Noto Serif KR",serif}
+.wa h3{margin:0 0 10px;font-size:18px;color:#18214a;border-left:4px solid #8c77cb;padding-left:10px}
+.wa-head{background:linear-gradient(135deg,#18214a,#55449b);border-radius:12px;padding:22px 17px;color:#fff;margin:8px 0 14px}
+.wa-head>span{font-weight:800;letter-spacing:.06em;font-size:11px;color:#eadbff}
+.wa-head h2{font-size:23px;line-height:1.45;margin:9px 0}.wa-head p{font-size:14px;color:#edeafa;margin:7px 0;line-height:1.7}
+.wa-stat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:15px}
+.wa-stat span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);text-align:center;border-radius:8px;padding:7px 2px;font-size:11px}
+.wa-stat b{display:block;font-size:22px;color:#f1d484}
+.wa-box{padding:18px 15px;background:#fff;border:1px solid #d9e1ee;border-radius:12px;margin:12px 0;box-shadow:0 4px 12px rgba(25,43,90,.035)}
+.wa-box p{font-size:14px;margin:9px 0;line-height:1.82}
+.wa .wa-muted{font-size:12.5px;color:#5c6780;line-height:1.65}.wa .wa-bigline{font-weight:800;font-size:18px;color:#55449b}
+.wa-alert{border-left:3px solid #cf9c2b;background:#fff8e8;padding:8px 11px;font-size:13px!important}
+.wa-chips{display:flex;gap:5px;overflow:auto;padding:4px 0 10px}
+.wa-chips button{white-space:nowrap;border:1px solid #d4dcec;background:#f6f8ff;color:#3a4a6e;padding:8px 10px;border-radius:20px;font:inherit;font-size:12px}
+.wa-chips button.on{background:#55449b;color:#fff;border-color:#55449b}
+.wa-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.wa-tile{display:flex;flex-direction:column;align-items:flex-start;text-align:left;position:relative;min-width:0;min-height:155px;border:1px solid #d8dfee;background:linear-gradient(150deg,#fff,#f7f6ff);border-radius:10px;padding:13px 10px;cursor:pointer;color:#222f50}
+.wa-tile[hidden]{display:none!important}.wa-tile:focus-visible{outline:3px solid #8365d3;outline-offset:2px}
+.wa-tile-ico{font-size:27px}.wa-tile-txt{display:flex;flex-direction:column;min-width:0;margin-top:3px}
+.wa-tile-txt b{font-size:14px;line-height:1.3}.wa-tile-txt small{font-size:11px;color:#66718a}.wa-tile-txt em{font-size:13px;font-style:normal;color:#5c478c;line-height:1.4;margin-top:5px}
+.wa-status{font-size:10px;background:#e7defd;color:#4f3d85;padding:2px 5px;border-radius:4px;margin-top:auto}
+.wa-tile-pending{background:#f3f5f8;opacity:.85}.wa-tile-pending .wa-status{background:#e6e8ed;color:#626b7c}
+.wa-detail{margin:15px 0 0;background:#fdfcff;border:2px solid #8e7ac9}
+.wa-detail-head{display:flex;align-items:center;gap:13px}.wa-detail-head .wa-big{font-size:46px}
+.wa-detail-head small{font-size:12px;color:#69718a}.wa-detail h3{border:0;padding:0;margin:0;font-size:21px}
+.wa-symbol{display:block;color:#55449b;font-size:17px;margin-top:3px}.wa-card-sub{background:#f1eeff;padding:8px;border-radius:8px;font-weight:700}
+.wa-story{background:#f7f8fe;border-left:4px solid #8273c3;border-radius:6px;padding:11px;margin:12px 0}
+.wa-story b{color:#35266d;font-size:14px}.wa-story p{margin:5px 0;font-size:14px}
+.wa-story-example{background:#f3f9f4;border-color:#42a17c}.wa-story-example b{color:#1a6d52}
+.wa-story-note{background:#fff9ec;border-color:#d6ad52}.wa-story-note b{color:#74501a}
+.wa-pill-list{display:flex;flex-wrap:wrap;gap:6px}.wa-pill-list span{background:#eeeafd;color:#4b3886;border-radius:20px;padding:4px 10px;font-size:12px;font-weight:700}
+.wa-proof{border-top:1px solid #ddd6ee;margin-top:13px;padding-top:12px}.wa-proof summary{color:#45337b;font-size:13px;font-weight:700}
+.wa-close{font:inherit;font-size:13px;font-weight:700;background:#55449b;color:#fff;border:0;border-radius:7px;padding:11px 14px;margin-top:14px}
+.wa-spotlight{border-top:5px solid #8b71bd;background:#faf9ff}
+.wa-bars{display:grid;gap:12px}.wa-bar-label{display:flex;justify-content:space-between;gap:5px;align-items:baseline}.wa-bar-label b{font-size:13px}.wa-bar-label span{font-size:11px;color:#5d6981}
+.wa-track{height:10px;background:#e7e5ee;border-radius:10px;overflow:hidden;margin:6px 0}.wa-fill{height:100%;background:linear-gradient(90deg,#8176be,#4a81b2);border-radius:10px}
+.wa-bar details{padding:0;margin:0;border:0}.wa-bar summary{font-size:11.5px;color:#6d598f;cursor:pointer}.wa-bar details p{font-size:12px;margin:3px 0}
+.wa-soft{background:#fbf6ed;color:#715f40;padding:9px;font-size:12px!important;border-radius:7px}
+.wa-two{display:grid;grid-template-columns:1fr 1fr;gap:8px}.wa-two>div{background:#f4f6fa;border-radius:8px;padding:11px}.wa-two b{font-size:13px}.wa-two p{font-size:12.5px;margin:5px 0}
+.wa-character{display:flex;align-items:center;gap:12px;background:#f2f0ff;padding:12px;border-radius:10px}.wa-character>span{font-size:44px}.wa-character b{font-size:17px;color:#493385}.wa-character p{font-size:13px;margin:5px 0}
+.wa-question{padding-left:20px;font-size:14px;line-height:1.9}.wa-question li{margin:7px 0}.wa-closing{background:#ecf8f1;color:#1b6652;border-radius:8px;padding:12px;font-weight:700}
+.wa-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.wa-actions button{font:inherit;border:0;border-radius:8px;background:#55449b;color:#fff;padding:11px 8px;font-size:12px;font-weight:700}
+.wa a{color:#315cac;overflow-wrap:anywhere}
+@media(max-width:360px){.wa-stat span{font-size:10px}.wa-tiles{gap:6px}.wa-tile{padding:11px 7px}.wa-tile-txt b{font-size:12.5px}.wa-bar-label span{font-size:10px}.wa-two{grid-template-columns:1fr}}
+@media print{body.wa-print-mode #reportPrint .wa-print{display:block!important}body.wa-print-mode #reportPrint .wa{font-size:10pt}body.wa-print-mode #reportPrint .wa-box{break-inside:avoid;box-shadow:none}body.wa-print-mode #reportPrint .wa-head{background:#f5f2ff;color:#18214a}body.wa-print-mode #reportPrint .wa-head p{color:#18214a}body.wa-print-mode #reportPrint button{display:none!important}body.wa-print-mode #reportPrint .wa-tiles{grid-template-columns:repeat(3,1fr)}body.wa-print-mode #reportPrint .wa-tiles .wa-tile{border:1px solid #ddd;color:#18214a;display:block!important}body.wa-print-mode #reportPrint .wa-status{display:none}}
+
+</style>
+<script id="world-destiny-module">
+/* World Destiny Atlas extension v1.0 — deterministic cultural calendar calculations. */
+(function(global){
+'use strict';
+const NAMES=['주도성','탐구','창의','관계','책임','변화','실행','성장','감성','신중'];
+const TRAIT_DESC=[
+ ['앞에 나서서 방향을 잡는 모습','내 말이 정답이라고 밀어붙이지 않기','모둠장이 되어 모두의 의견을 듣고 역할을 나누는 장면'],
+ ['궁금한 것을 깊이 알아보는 모습','생각만 하다가 시작을 미루지 않기','무지개가 생기는 이유를 찾아 책과 실험으로 확인하는 장면'],
+ ['새로운 표현과 아이디어를 떠올리는 모습','아이디어를 실제로 시험해 보기','같은 재료로 친구들과 전혀 다른 작품을 만드는 장면'],
+ ['다른 사람과 마음을 나누는 모습','상대의 기분을 혼자 짐작하지 않기','친구가 속상할 때 말을 끊지 않고 이야기를 듣는 장면'],
+ ['약속과 질서를 지키려는 모습','계획이 달라져도 유연하게 대처하기','매일 조금씩 연습해서 학예회 무대를 완성하는 장면'],
+ ['새로운 길을 시도하는 모습','위험과 준비물을 먼저 살피기','처음 가는 체험학습에서 새로운 활동에 참여하는 장면'],
+ ['계획을 행동으로 옮기는 모습','서두르다가 놓친 것이 없는지 확인하기','모둠 발표 아이디어를 실제 발표 자료로 만드는 장면'],
+ ['새것을 배우고 익히는 모습','한 번에 너무 많은 목표를 잡지 않기','어제 실패한 문제를 오늘 다른 방법으로 풀어 보는 장면'],
+ ['느낌과 상상을 섬세하게 다루는 모습','감정을 사실과 구분하여 생각하기','친구의 표정을 보고 마음을 물어보는 장면'],
+ ['결정을 천천히 살펴보는 모습','확인만 하다가 기회를 놓치지 않기','준비물을 한 번 더 확인하고 여행을 떠나는 장면']
+];
+const DAYS=['일','월','화','수','목','금','토'];
+const MAYA=['Imix','Ik’','Ak’b’al','K’an','Chikchan','Kimi','Manik’','Lamat','Muluk','Ok','Chuwen','Eb’','B’en','Ix','Men','K’ib’','Kab’an','Etz’nab’','Kawak','Ajaw'];
+const MAYA_KO=['악어·물의 시작','바람','새벽·어둠','씨앗','뱀','죽음·변화','사슴','별·토끼','물','개','원숭이','길','갈대','재규어','독수리','올빼미·밀랍(전승별 차이)','땅의 움직임','부싯돌','폭풍','태양·주인'];
+const MAYA_TRAIT=[[7,5],[3,8],[1,9],[7,4],[5,6],[5,9],[3,4],[2,8],[3,8],[3,4],[2,6],[7,5],[0,4],[1,9],[0,1],[7,1],[5,6],[1,6],[5,7],[0,8]];
+const WEST=[
+ ['염소자리','♑','꾸준히 산을 오르는 산양','한 계단씩 목표를 향해 가는 이야기',[4,9]],['물병자리','♒','새로운 생각을 내는 물병','남과 다른 방법을 시도하는 이야기',[2,5]],['물고기자리','♓','물속을 헤엄치는 물고기','감정과 상상을 살펴보는 이야기',[8,3]],['양자리','♈','앞장서 달리는 숫양','첫걸음을 내딛는 용기의 이야기',[0,6]],['황소자리','♉','천천히 걷는 황소','지속하며 지켜 가는 이야기',[4,9]],['쌍둥이자리','♊','서로 이야기하는 쌍둥이','질문과 이야기를 나누는 모습',[3,2]],['게자리','♋','집을 지키는 게','소중한 관계를 돌보는 이야기',[3,8]],['사자자리','♌','빛나는 갈기를 가진 사자','표현하고 앞장서는 이야기',[0,2]],['처녀자리','♍','꼼꼼하게 살피는 사람','작은 차이를 알아보는 이야기',[1,9]],['천칭자리','♎','양쪽을 재는 저울','서로 다른 의견의 균형을 찾는 이야기',[3,9]],['전갈자리','♏','깊은 곳을 살피는 전갈','한 가지를 깊이 파고드는 이야기',[1,8]],['사수자리','♐','먼 곳을 향하는 화살','새로운 곳으로 나아가는 이야기',[5,7]]
+];
+const NUM={1:['첫발을 내딛는 사람','스스로 시작하는 힘',[0,6]],2:['친구의 손을 잡는 사람','협력하며 조화를 찾는 힘',[3,8]],3:['이야기를 만드는 사람','상상하고 표현하는 즐거움',[2,8]],4:['튼튼한 집을 짓는 사람','차근차근 쌓는 꾸준함',[4,9]],5:['새 길을 발견하는 사람','바뀌는 환경을 탐색하는 호기심',[5,7]],6:['친구를 돌보는 사람','돌봄과 책임을 떠올리는 상징',[3,4]],7:['수수께끼를 푸는 사람','생각하고 탐구하는 자세',[1,9]],8:['큰 프로젝트를 맡는 사람','목표와 조직을 생각하는 상징',[0,6]],9:['모두를 감싸는 사람','넓게 공감하며 나누는 상징',[3,8]],11:['영감의 등불','직관과 상상을 연결하는 상징',[2,8]],22:['큰 설계도','아이디어를 현실로 옮기는 상징',[4,6]],33:['따뜻한 돌봄','돌봄과 배움을 연결하는 상징',[3,7]]};
+const WEEK_ANIMAL=[['가루다','🦅',[0,5]],['호랑이','🐯',[0,6]],['사자','🦁',[0,4]],['엄니 있는 코끼리','🐘',[4,1]],['엄니 없는 코끼리','🐘',[5,8]],['쥐','🐭',[1,9]],['기니피그','🐹',[3,8]],['나가(용·뱀)','🐍',[1,8]]];
+const THAI=[['빨강','🔴',[0,6]],['노랑','🟡',[7,2]],['분홍','🩷',[3,8]],['초록','🟢',[4,7]],['주황','🟠',[6,5]],['파랑','🔵',[1,9]],['보라','🟣',[2,8]]];
+const NINE=[null,['일백수성','물·흐름',[1,9]],['이흑토성','흙·돌봄',[3,4]],['삼벽목성','나무·시작',[0,5]],['사록목성','나무·성장',[3,7]],['오황토성','흙·중심',[4,6]],['육백금성','쇠·책임',[0,9]],['칠적금성','쇠·기쁨',[2,3]],['팔백토성','산·꾸준함',[4,9]],['구자화성','불·표현',[2,8]]];
+const PENDING=[
+ {id:'india',region:'인도',name:'베다 점성술',icon:'🪷',intro:'달과 행성으로 읽는 하늘 지도',reason:'달의 낙샤트라, 상승궁 등을 정확하게 구하려면 검증된 천문 계산과 출생지·정확한 출생 시간이 필요해요.',example:'하늘을 커다란 시계로 생각해요. 바늘이 어느 곳을 가리켰는지 알아야 자세한 지도를 그릴 수 있지요.'},
+ {id:'ziwei',region:'중국·대만',name:'자미두수',icon:'🌟',intro:'열두 칸에 별을 놓는 이야기',reason:'음력 명반과 시각별 12궁 배치를 검증한 엔진이 아직 연결되지 않았어요.',example:'게임판 열두 칸에 여러 말을 놓는 것처럼, 별의 자리마다 서로 다른 이야기를 붙여요.'},
+ {id:'aztec',region:'아즈텍',name:'토날포우알리',icon:'🗿',intro:'260일을 세는 신성한 달력',reason:'마야와 이름이 비슷하지만 서로 다른 날짜 기호와 역사적 대응 기준이 있어요. 환산 기준이 확정될 때까지 개인별 기호를 단정하지 않아요.',example:'같은 길이의 달력을 쓰더라도 첫 칸을 어디에 놓느냐에 따라 그날의 이름이 달라질 수 있어요.'},
+ {id:'tibet',region:'티베트',name:'티베트 점성술',icon:'🏔️',intro:'동물과 원소, 숫자가 만나는 이야기',reason:'여러 역사적 유파의 연도·원소·메와 계산 규칙을 선택하고 교차 검증해야 해요.',example:'동물 카드, 원소 카드, 숫자 카드를 여러 장 겹쳐 하나의 이야기를 만든다고 생각해 봐요.'},
+ {id:'human',region:'현대 서구',name:'휴먼디자인',icon:'🔷',intro:'몸 모양의 아홉 영역을 그리는 현대 체계',reason:'정확한 행성 위치 및 고유 계산법을 따르는 보디그래프 엔진이 연결되지 않았어요. 옛 문명의 점술이 아니라 현대에 만들어진 체계예요.',example:'나에게 맞는 선택 방법을 그림으로 표현하는 현대식 이야기 지도와 비슷해요.'}
+];
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function mod(n,m){return ((n%m)+m)%m;}
+function utcDays(y,m,d){const z=new Date(0);z.setUTCFullYear(y,m-1,d);z.setUTCHours(0,0,0,0);return Math.floor(z.getTime()/86400000);}
+function reduce(n){while(n>9)n=String(n).split('').reduce((a,b)=>a+ +b,0);return n;}
+function lifeNum(y,m,d){const n=String(y)+String(m).padStart(2,'0')+String(d).padStart(2,'0');let x=n.split('').reduce((s,c)=>s+ +c,0);while(x>9&&![11,22,33].includes(x))x=String(x).split('').reduce((s,c)=>s+ +c,0);return x;}
+function zodiac(m,d){const n=m*100+d;let i=11;if(n>=1222||n<120)i=0; else if(n>=120&&n<219)i=1;else if(n>=219&&n<321)i=2;else if(n>=321&&n<420)i=3;else if(n>=420&&n<521)i=4;else if(n>=521&&n<622)i=5;else if(n>=622&&n<723)i=6;else if(n>=723&&n<823)i=7;else if(n>=823&&n<923)i=8;else if(n>=923&&n<1024)i=9;else if(n>=1024&&n<1123)i=10;else if(n>=1123&&n<1222)i=11;return WEST[i];}
+function part(word,pair){const str=String(word), last=str.codePointAt(str.length-1);let consonant=false;if(last>=0xAC00&&last<=0xD7A3)consonant=((last-0xAC00)%28)!==0;else if(/[0-9]$/.test(str))consonant=/[013678]$/.test(str);else if(/[A-Za-z]$/.test(str))consonant=/[LMNRlmnr]$/.test(str);const [a,b]=pair.split('/');return str+(consonant?a:b);}
+function cleanParticles(text){return String(text).replace(/([가-힣A-Za-z0-9’'Ⅰ-Ⅻ]+)(은\(는\)|이\(가\)|을\(를\)|과\(와\)|으로\(로\))/g,(all,w,p)=>part(w,({'은(는)':'은/는','이(가)':'이/가','을(를)':'을/를','과(와)':'과/와','으로(로)':'으로/로'})[p]));}
+function article(text,pair){return part(text,pair);}
+function safeSaju(r){return !!(r && !r.uncertain && r.p && r.p[2] && Number.isInteger(r.p[2].g));}
+function item(id,region,name,icon,symbol,subtitle,traits,detail,example,shadow,origin,group,method){return {id,region,name,icon,symbol,subtitle,traits,detail,example,shadow,origin,group,method,status:'computed'};}
+function compute(inp,r){
+  const a=r.calc&&r.calc.solar?r.calc.solar:(r.birthDate?String(r.birthDate).split('.').map(Number):[inp.y,inp.m,inp.d]), y=a[0],m=a[1],d=a[2], day=utcDays(y,m,d), weekday=mod(day+4,7), cards=[];
+  const element=['나무','불','흙','쇠','물'];
+  const hasSaju=safeSaju(r);
+  const g=hasSaju?r.p[2].g:null;
+  const elIx=hasSaju?(mod(g,10)>>1):null;
+  const sajuTraits=hasSaju?[[7,0],[2,6],[4,9],[4,0],[1,8]][elIx]:[];
+  const dateP=hasSaju?r.p.filter(Boolean).map(v=>v.gz).join(' / '):'출생시각 후보 확인 필요';
+  if(hasSaju)cards.push(item('saju','한국·중국','사주명리학','🧭',element[elIx]+'의 일간',dateP,sajuTraits,
+    '사주에서는 태어난 해·달·날·시를 옛 글자로 적어요. 그중 태어난 날의 첫 글자를 ‘일간’이라고 불러요. 여기서는 '+element[elIx]+'의 이미지를 살펴봅니다.',
+    '예를 들어 '+article(element[elIx],'을/를')+' 만화 주인공으로 그려 보세요. 나무 친구는 씨앗을 키우고, 불 친구는 어두운 방을 밝히고, 흙 친구는 무너진 길을 다지고, 쇠 친구는 약속을 지키고, 물 친구는 어려운 문제의 길을 찾아요. 나는 언제 이런 일을 해 보았나요?',
+    '한 가지 원소만으로 성격을 단정할 수 없고, 시간·절기 경계에서는 명식이 달라질 수 있어요.',
+    '네 기둥의 간지에서 일간을 확인했습니다. 종합 10축 연결은 이 프로그램의 현대적 교육용 분류입니다.','east','사주 원국의 일간 '+(r.p&&r.p[2]?r.p[2].gz:'') ));
+  else cards.push({id:'saju',region:'한국·중국',name:'사주명리학',icon:'🧭',symbol:'시간 후보 확인 필요',subtitle:'태어난 날의 글자를 섣불리 정하지 않아요',traits:[],detail:'출생시각이 정확하지 않으면 날짜 경계에 따라 사주의 기둥이 달라질 수 있어요.',example:'시계가 자정 가까이를 가리킨다면 달력의 날짜가 바뀌는 것처럼, 사주도 후보를 살펴야 해요.',reason:'사주 후보 중 하나를 실제 출생기록으로 확인하면 해석할 수 있어요.',group:'east',status:'time-pending'});
+  const z=zodiac(m,d);
+  cards.push(item('west','유럽·서양','태양 별자리',z[1],z[1]+' '+z[0],z[2],z[4],
+    '서양의 12별자리 중 태양이 지나간다고 보는 영역이에요. 여기서는 태양 별자리만 살펴봅니다. 달 별자리와 상승궁은 계산하지 않았어요. '+z[3]+'예요.',
+    '동화 속 '+article(z[2],'이/가')+' 우리 반에 전학 왔다고 상상해 보세요. 친구들과 모둠 과제를 할 때 그 상징에 어울리는 역할을 맡겠지요. 나에게도 그런 순간이 있었나요?',
+    '별자리 성격 설명은 전통적·현대적 상징 이야기이지 실제 성격검사 결과가 아니에요.',
+    '일반적인 12구간 태양 별자리 날짜표를 적용했습니다. 경계일의 천문학적 정확한 태양 위치 계산은 제공하지 않아요.','west','양력 '+m+'월 '+d+'일 · 통상 태양 별자리 날짜표'));
+  const nv=lifeNum(y,m,d),nd=NUM[nv]||NUM[reduce(nv)];
+  cards.push(item('num','유럽 등','생년월일 수비학','🔢','인생 숫자 '+nv,nd[0],nd[2],
+    '생년월일의 숫자를 모두 더해 한 자리 수 또는 11·22·33으로 줄이는 현대 수비학의 한 방법이에요. '+nv+'은(는) ‘'+nd[1]+'’을 상징하는 이야기로 풀이합니다.',
+    '학교 축제 준비를 하는 장면을 떠올려 보세요. 숫자 '+nv+' 친구는 '+nd[0]+'처럼 행동할 수 있어요. '+nd[1]+'을 보여 주는 일은 어떤 것이 있을까요? 내가 경험한 일을 한 가지 골라 보세요.',
+    '숫자를 더하는 규칙에도 여러 유파가 있어요. 숫자로 사람의 미래나 성격을 확정할 수는 없어요.',
+    '양력 YYYYMMDD 숫자를 한 자리 또는 11·22·33까지 합산하는 규칙입니다.','west','입력 숫자 합산 → '+nv));
+  const delta=day-utcDays(2012,12,21),mi=mod(19+delta,20),tone=mod(3+delta,13)+1;
+  cards.push(item('maya','마야','촐킨 탄생일','🌞',tone+' '+MAYA[mi],MAYA_KO[mi],MAYA_TRAIT[mi],
+    '마야의 촐킨 달력은 20가지 날짜 이름과 13가지 숫자가 함께 돌아가는 260일의 주기예요. '+article(MAYA[mi],'은/는')+' '+article(MAYA_KO[mi],'과/와')+' 연결된 기호예요. 숫자 '+tone+'도 함께 기록해요.',
+    '우리 반 달력에 그림 도장 20개와 숫자 도장 13개를 번갈아 찍어 보세요. 내 생일에는 '+MAYA[mi]+' 그림과 '+tone+'번 숫자가 만나요. 두 도장이 만나는 날을 찾아 ‘비밀 날짜 카드’를 만드는 놀이예요.',
+    '20가지 기호에 붙인 한국어 성향은 전통 문헌의 확정적 심리 유형이 아니라 이 사이트의 상징적 독서 도우미예요.',
+    'GMT 584283 상관상수를 기준으로 2012-12-21=4 Ajaw에서 날짜 차이를 계산했습니다. 다른 상관상수는 최대 며칠 차이가 날 수 있어요.','meso','GMT 584283 · 2012-12-21 = 4 Ajaw'));
+  const morning=(inp.timeKind==='exact'?(inp.h<12):inp.timeKind==='branch'?(inp.branch>=0&&inp.branch<=5?true:inp.branch>=7&&inp.branch<=11?false:null):null);
+  const wd=(weekday===0?0:weekday===1?1:weekday===2?2:weekday===3?(morning===null?null:morning?3:4):weekday===4?5:weekday===5?6:7);
+  const animal=wd===null?null:WEEK_ANIMAL[wd];
+  cards.push(item('myanmar','미얀마','8요일 동물 점성술','🐾',animal?animal[1]+' '+animal[0]:'🐘 수요일 코끼리',
+    animal?'태어난 요일: '+DAYS[weekday]+'요일':'수요일 오전·오후 구분 필요',animal?animal[2]:[],
+    '미얀마의 전통에서는 수요일을 오전과 오후로 나누어 한 주를 여덟 구역처럼 생각해요. '+(animal?'당신의 요일 동물은 '+animal[0]+'예요.':'태어난 시간이 확실하지 않아 수요일의 두 코끼리 중 하나를 정하지 않았어요.'),
+    '학교 운동장에서 '+(animal?animal[0]:'코끼리')+'가 응원단 친구로 나타났다고 상상해 보세요. 동물의 걸음걸이와 모습으로 별명을 만들어 보세요. 미얀마에서는 생일 요일을 이런 동물과 연결해 기억해요.',
+    '수요일은 오전·오후에 따라 코끼리 모습이 달라져요. 정오에 걸친 시간대나 시간 미상은 확인이 필요해요. 해외 출생지는 현지 날짜와 요일 계산이 별도로 필요합니다.',
+    '양력 날짜의 요일과 수요일 오전·오후 규칙을 적용했습니다. 정밀한 출생 지역의 현지 요일 전환은 지원하지 않습니다.','southeast', '양력 '+y+'-'+m+'-'+d+' · '+DAYS[weekday]+'요일'));
+  const th=THAI[weekday];
+  cards.push(item('thai','태국','탄생 요일과 색상','🎨',th[1]+' '+th[0],DAYS[weekday]+'요일의 전통색',[],
+    '태국에는 요일마다 색상을 연결하는 문화가 있어요. '+DAYS[weekday]+'요일을 대표하는 전통 색으로 '+th[0]+'을(를) 소개해요. 성격이나 미래를 말해 주는 검사는 아니에요.',
+    '생일 파티 초대장을 '+article(th[0],'으로/로')+' 꾸며 보세요. 풍선 3개와 색연필 1개를 이 색으로 맞추면 나만의 ‘요일 파티’가 완성돼요. 친구는 무슨 요일에 태어났을까요?',
+    '요일 색깔만으로 성향 점수를 만들지 않았어요. 문화 체험용 카드입니다.',
+    '양력 요일을 태국 요일별 전통 색과 연결했습니다. 태국식 전문 점성술의 전체 계산은 아닙니다.','southeast','양력 '+DAYS[weekday]+'요일 → '+th[0]));
+  const yearG=hasSaju&&r.p[0]?r.p[0].g:null;
+  const ky=yearG===null?(m<2||(m===2&&d<4)?y-1:y):(mod(y-4,10)===yearG?y:y-1);
+  const ki=mod(11-mod(ky,9)-1,9)+1,ns=NINE[ki];
+  const nineBoundary=!hasSaju&&m===2&&d>=3&&d<=5;
+  if(!nineBoundary)cards.push(item('nine','일본·동아시아','구성기학(본명성)','⭐',ns[0],ns[1],ns[2],
+    '일본에서 널리 쓰이는 구성기학은 9개의 별을 이용해 태어난 해의 성질을 상징적으로 표현해요. '+ns[0]+'은(는) '+ns[1]+' 이미지를 가진 별 이름이에요.',
+    '학교 동아리가 별 모양 배지를 만든다고 해 보세요. 나는 '+ns[0]+' 배지를 받아요. '+ns[1]+'의 이미지를 배지에 그려 꾸밀 수 있지요. 전통의 별 이름을 나만의 상징으로 바꿔 보는 놀이예요.',
+    '입춘은 해마다 시작하는 정확한 시각이 달라요. 기존 사주 엔진의 절기 연도와 같은 기준을 사용했어요.',
+    '기존 사주 엔진이 계산한 연주의 입춘 경계를 기준으로 본명성을 계산했습니다. 출생 정보와 계산 기준이 적절한지 확인이 필요하며 월명성·일명성은 제공하지 않아요.','east','기준 연도 '+ky+' · 본명성 '+ki));
+  else cards.push({id:'nine',region:'일본·동아시아',name:'구성기학(본명성)',icon:'⭐',symbol:'입춘 경계 확인 필요',subtitle:'절기가 바뀌는 시각을 확인해요',traits:[],detail:'입춘에 가까운 생일이에요. 정확한 절기 연도를 정해야 해요.',example:'체육대회 시작 종이 울리기 전후처럼, 같은 날에도 시작 시각이 중요할 수 있어요.',reason:'출생 시간이 확인되지 않은 입춘 경계이므로 자동으로 한 해를 고르지 않아요.',group:'east',status:'time-pending'});
+  PENDING.forEach(p=>cards.push({...p,status:'pending',traits:[],symbol:'계산 준비 중',subtitle:p.intro}));
+  return {cards,solar:[y,m,d],weekday, boundary:nineBoundary,timeUnknown:inp.timeKind!=='exact',known:cards.filter(c=>c.status==='computed').length};
+}
+const EXPLAIN_N=[
+ '사주는 네 기둥을 조합하는 전통이라 일간 하나의 뜻만으로 전체를 판단할 수 없습니다.',
+ '서양의 태양 별자리는 12개 중 하나이며, 여기서는 전체 출생 차트가 아닙니다.',
+ '마야의 260일 촐킨과 아즈텍의 260일 달력은 역사가 연관되어 독립된 결과가 아닙니다.',
+ '한국·중국 사주와 일본 구성기학도 동아시아 문화권의 영향을 공유합니다.'
+];
+function consensus(cards){
+ const eligible=cards.filter(c=>c.status==='computed'&&c.traits.length);
+ const tally=NAMES.map((name,i)=>({name,i,cards:eligible.filter(c=>c.traits.includes(i)),groups:[]}));
+ tally.forEach(t=>t.groups=[...new Set(t.cards.map(c=>c.group))]);
+ return {eligible,tally:tally.sort((a,b)=>b.cards.length-a.cards.length||b.groups.length-a.groups.length||a.i-b.i)};
+}
+let current=null,selected='computed',detailOpen=false;const selfVotes={};
+function titleSummary(data){const {eligible,tally}=consensus(data.cards);const best=tally[0];if(!best||best.cards.length<2)return '여러 문화의 색다른 탄생 이야기';return best.name+'의 이야기가 자주 등장해요';}
+function introCard(c){let badge=c.status==='computed'?(c.id==='west'?'날짜표 분류':c.id==='thai'?'요일 문화':c.id==='nine'?'절기 기준':'계산됨'):c.status==='time-pending'?'시간 확인 필요':'문화 소개';return `<button class="wa-tile ${c.status!=='computed'?'wa-tile-pending':''}" ${c.status!=='computed'?'hidden':''} data-wa-card="${esc(c.id)}" type="button" aria-label="${esc(c.name)} 자세히 보기"><span class="wa-tile-ico">${c.icon}</span><span class="wa-tile-txt"><b>${esc(c.name)}</b><small>${esc(c.region)}</small><em>${esc(c.status==='pending'?'이야기 살펴보기':c.symbol)}</em></span><span class="wa-status">${badge}</span></button>`;}
+function graph(data){const s=consensus(data.cards),n=s.eligible.length;return `<section class="wa-box"><h3>🧩 서로 닮은 이야기 TOP 10</h3><p class="wa-muted">각 체계의 상징을 10가지 쉬운 말로 바꾸어 비교했어요. <b>성격 검사 점수가 아니라, 제작자가 연결한 주제의 등장 횟수</b>예요. 문화권이 같으면 서로 영향을 받았을 수 있어요.</p><div class="wa-bars">${s.tally.map((t,i)=>`<div class="wa-bar"><div class="wa-bar-label"><b>${esc(t.name)}</b><span>${t.cards.length}/${n}개 체계 · ${t.groups.length}개 그룹</span></div><div class="wa-track"><div class="wa-fill" style="width:${n?Math.round(t.cards.length/n*100):0}%"></div></div><details><summary>어떤 전통이 말했나요?</summary><p>${t.cards.length?t.cards.map(c=>esc(c.name+' ('+c.symbol+')')).join(' · '):'연결된 상징이 없어요.'}</p><p>예: ${TRAIT_DESC[t.i][2]}</p></details></div>`).join('')}</div><p class="wa-soft">※ 카드 중 태국 탄생색은 성격 축에 넣지 않았어요. 결과가 계산되지 않은 5개 체계도 분모에서 제외했어요.</p></section>`;}
+function cardDetail(c){if(!c)return '';let ready=c.status==='computed';return cleanParticles(`<section class="wa-box wa-detail" id="waCardDetail"><div class="wa-detail-head"><span class="wa-big">${c.icon}</span><div><small>${esc(c.region)} · ${ready?'출생 정보로 산출':'문화 소개만 제공'}</small><h3>${esc(c.name)}</h3><b class="wa-symbol">${esc(c.symbol)}</b></div></div><p class="wa-card-sub">${esc(c.subtitle)}</p><div class="wa-story"><b>🌱 초등학생도 이해하는 한 줄 이야기</b><p>${esc(ready?c.detail:c.intro)}</p></div><div class="wa-story wa-story-example"><b>🎒 학교·집에서 떠올리는 재미있는 예시</b><p>${esc(ready?c.example:c.example)}</p></div>${ready&&c.traits.length?`<div class="wa-story"><b>💪 이 상징을 생활에 연결한다면?</b><p>이 이야기에서는 ${esc(article(NAMES[c.traits[0]],'과/와'))} ${esc(article(NAMES[c.traits[1]],'을/를'))} 떠올려 볼 수 있어요. 예를 들어 ${esc(TRAIT_DESC[c.traits[0]][2])}. 하지만 ${esc(TRAIT_DESC[c.traits[0]][1])}도 기억해 보세요.</p></div><div class="wa-pill-list">${c.traits.map(i=>`<span>${NAMES[i]}</span>`).join('')}</div><p class="wa-muted">이 키워드는 전통에서 계산된 기호에 이 사이트가 붙인 <b>현대적 설명</b>이에요.</p>`:''}<div class="wa-story wa-story-note"><b>🔎 어떻게 읽을까요?</b><p>${esc(ready?c.shadow:c.reason)}</p></div>${ready?`<details class="wa-proof"><summary>📐 계산 근거·범위 확인하기</summary><p>${esc(c.method)}</p><p>${esc(c.origin)}</p></details>`:`<p class="wa-muted">자료를 무작위로 만들어 결과를 채우지 않도록, 검증된 계산 엔진을 연결할 때까지 이 카드에는 개인 운세가 표시되지 않아요.</p>`}${ready?`<div class="wa-vote"><b>🤔 실제 나와 얼마나 닮았나요?</b><p>카드 이야기를 읽고 직접 골라 보세요. 정답은 없어요.</p><button type="button" data-wa-vote="yes" data-wa-id="${c.id}">😊 나와 닮아요</button><button type="button" data-wa-vote="no" data-wa-id="${c.id}">🙂 나는 조금 달라요</button><small>${selfVotes[c.id]?'내 선택: '+(selfVotes[c.id]==='yes'?'나와 닮아요':'나는 조금 달라요'):''}</small></div>`:''}<button type="button" class="wa-close" id="waCloseDetail">← 카드 목록으로</button></section>`);}
+function reportText(data){const s=consensus(data.cards),best=s.tally.slice(0,3), n=s.eligible.length;return `세계 운명학 · 탄생 이야기\n양력 ${data.solar.join('.')}\n개인별 계산 ${data.known}/12개 (성향 비교 ${n}개)\n\n`+data.cards.map(c=>`${c.name}: ${c.status==='computed'?c.symbol:'계산 준비 중'}`).join('\n')+'\n\n여러 이야기에서 반복된 주제\n'+best.map(x=>`${x.name}: ${x.cards.length}/${n}개, 문화권 그룹 ${x.groups.length}개`).join('\n')+'\n\n이 결과는 전통 상징의 비교이며 성격·미래 예측이 아닙니다.';}
+function render(inp,r){current=compute(inp,r);selected='computed';return root();}
+function disagreements(data){
+ const used=data.cards.filter(c=>c.status==='computed'&&c.traits.length);
+ const pairs=[[5,9],[2,4],[6,1],[0,3]];
+ for(const [a,b] of pairs){const left=used.find(c=>c.traits.includes(a)),right=used.find(c=>c.id!==left?.id&&c.traits.includes(b));if(left&&right)return {left,right,a,b};}
+ return null;
+}
+function passport(d){const find=id=>d.cards.find(x=>x.id===id),s=find('saju'),w=find('west'),m=find('maya'),b=find('myanmar'),t=find('thai');return `<section class="wa-box wa-passport"><h3>🛂 내 세계 탄생 여권</h3><p>나라를 여행할 때 도장을 찍듯, 생일에 붙은 다섯 가지 상징을 모았어요.</p><div class="wa-stamps">${[[s,'🧭 사주 친구'],[w,'✨ 별자리'],[m,'🌞 마야 기호'],[b,'🐾 요일 동물'],[t,'🎨 탄생색']].map(([c,label])=>`<div><small>${label}</small><b>${esc(c&&c.status==='computed'?c.symbol:'확인 중')}</b></div>`).join('')}</div><p class="wa-soft">이 카드들은 각 문화에서 사용하는 상징이에요. 나의 실제 성격을 결정하는 도장은 아니랍니다.</p></section>`;}
+function root(){const d=current;if(!d)return '';let c=consensus(d.cards),best=c.tally[0],second=c.tally[1],ties=c.tally.filter(x=>best&&x.cards.length===best.cards.length&&x.groups.length===best.groups.length&&best.cards.length>0),diff=disagreements(d),w=d.cards.find(x=>x.id==='west'),s=d.cards.find(x=>x.id==='saju');let daily=d.cards.filter(x=>x.status==='computed');let dayIndex=mod(utcDays(...d.solar)+Math.floor(Date.now()/86400000),daily.length||1),today=daily[dayIndex];return `<div class="wa" id="worldAtlas"><div class="wa-head"><span>🌍 WORLD DESTINY ATLAS</span><h2>세계가 들려주는 나의 탄생 이야기</h2><p>생일 하나로 떠나는 12장의 문화 여행! ${d.known}장은 내 생일을 계산한 카드, 나머지는 다른 문화의 달력 이야기예요.</p><div class="wa-stat"><span><b>${d.known}</b>장 개인 결과</span><span><b>12</b>장 문화 카드</span><span><b>10</b>가지 이야기 주제</span></div></div>${passport(d)}<section class="wa-box wa-intro"><h3>🎁 내 탄생 이야기를 한눈에</h3><p class="wa-bigline">${esc(titleSummary(d))}</p><p>양력 ${d.solar[0]}년 ${d.solar[1]}월 ${d.solar[2]}일 · ${DAYS[d.weekday]}요일</p><p>${w?`<b style="color:#6b41ae">${esc(w.symbol)} 별자리</b> · `:''}${s&&s.status==='computed'?esc(s.symbol)+' · ':''}${today?esc(today.symbol):'문화 여행을 시작해요'}처럼 저마다 다른 기호가 하나의 생일에 모였어요.</p><p class="wa-muted">계산값은 달력의 기호이고, 뒤따르는 성향 이야기는 재미로 생각해 보는 비유예요.</p>${d.boundary?'<p class="wa-alert">⚠️ 입춘 근처라 출생 시간이 필요해요. 구성기학은 시간을 확인한 후 계산합니다.</p>':''}${d.timeUnknown?'<p class="wa-alert">⏰ 태어난 시간을 몰라도 볼 수 있는 결과부터 보여드려요. 시간이 필요한 사주는 후보 확인 후 살펴보세요.</p>':''}</section><section class="wa-box"><h3>🎴 오늘 펼쳐 볼 세계 카드</h3><p class="wa-muted">오늘 날짜와 생일로 고른 탐험 카드예요. 내일은 다른 문화가 소개될 수 있어요. 오늘의 실제 운세 예측은 아닙니다.</p><div class="wa-daily"><b>${today?today.icon+' '+esc(today.name):'🌏 세계 문화 여행'}</b><strong>${today?esc(today.symbol):'새로운 이야기'}</strong><p>${today?esc(cleanParticles(today.detail)):'새로운 카드를 한 장씩 살펴보세요.'}</p></div></section><section class="wa-box"><h3>🗺️ 내 세계 카드 ${d.known}장부터 열어 보기</h3><p class="wa-muted">한 장씩 누르면 학교·친구·가족의 구체적인 생활 예시를 읽을 수 있어요. 나머지 문화 소개 카드도 펼쳐 볼 수 있어요.</p><div class="wa-chips"><button class="wa-filter" data-wa-filter="all" type="button">12장 모두</button><button class="wa-filter on" data-wa-filter="computed" type="button">내 생일 결과 ${d.known}장</button><button class="wa-filter" data-wa-filter="pending" type="button">문화 소개·확인 필요 ${12-d.known}장</button></div><div id="waTiles" class="wa-tiles">${d.cards.map(introCard).join('')}</div><div id="waDetailSlot" aria-live="polite"></div></section><section class="wa-box wa-spotlight"><h3>✨ 내 카드에서 자주 나온 이야기</h3><p>${ties.length>1?'공동으로 가장 자주 나타난 주제는 '+ties.map(t=>'<b>'+esc(t.name)+'</b>').join(' · ')+'예요.':`가장 자주 나온 주제는 <b>${esc(best?best.name:'여러 상징')}</b>예요.`} ${best?best.cards.length:0}개 체계에서 이 단어를 떠올리게 하는 상징이 등장했어요.</p><p>${best&&best.cards.length?esc(TRAIT_DESC[best.i][2]):'여러 문화의 탄생 이야기를 읽어 보세요.'}</p><p class="wa-muted">여기서 ‘몇 개’는 사이트가 주제별로 분류한 개수예요. 실제 나의 능력 점수도, 미래를 맞힐 확률도 아니에요.</p></section><details class="wa-expand"><summary>📊 나의 10가지 주제 전체 그래프 펼치기</summary>${graph(d)}</details><section class="wa-box"><h3>⚖️ 서로 다르게 들리는 내 이야기</h3>${diff?`<div class="wa-two"><div><b>${esc(diff.left.name)} · ${esc(NAMES[diff.a])}</b><p>${esc(TRAIT_DESC[diff.a][2])}</p></div><div><b>${esc(diff.right.name)} · ${esc(NAMES[diff.b])}</b><p>${esc(TRAIT_DESC[diff.b][2])}</p></div></div><p>예를 들어 한쪽은 <b>${esc(NAMES[diff.a])}</b>, 다른 쪽은 <b>${esc(NAMES[diff.b])}</b>을 떠올려요. 비슷한 날에도 조심해서 계획할 때와 새로운 도전을 할 때가 있지요. 둘 다 내 모습일 수 있어요.</p>`:'<p>이번에는 서로 반대되는 두 성향을 뚜렷하게 짝지어 설명할 만큼 자료가 모이지 않았어요. 없는 차이를 억지로 만들지 않을게요.</p>'}<p class="wa-muted">두 전통이 실제로 이런 성격이라고 판단한 것은 아니고, 사이트의 설명 단어를 비교한 결과예요.</p></section><section class="wa-box"><h3>🦸 내 이야기 속 주인공</h3><div class="wa-character"><span aria-hidden="true">🧙‍♂️</span><div><b>${ties.length>1?'여러 재능을 품은 탐험가':best&&best.cards.length>=2?esc(best.name+' 탐험가'):'세계 문화 탐험가'}</b><p>${best?esc(TRAIT_DESC[best.i][0]+'을 상상해 보세요. '+TRAIT_DESC[best.i][2]):'세계 각지의 상징을 하나씩 모아 보는 사람이에요.'}</p></div></div><p class="wa-muted">캐릭터는 상징 놀이에서 붙여 준 별명이지 실제 성격 진단이 아니에요.</p></section><section class="wa-box"><h3>😊 나는 어떤 카드와 닮았을까?</h3><p>각 카드를 열고 ‘나와 닮아요’ 또는 ‘나는 조금 달라요’를 선택해 보세요.</p><div id="waVoteSummary">${voteSummary()}</div><p>예: ‘새로 시작하는 건 좋아하지만, 숙제는 천천히 확인하는 편이야.’처럼 실제 내 경험을 말해 보세요.</p></section><section class="wa-box"><h3>📝 내가 만들어 갈 다음 이야기</h3><p>① 내 생일을 설명하는 상징 중 가장 마음에 드는 것은 무엇일까요?</p><p>② 친구는 나를 어떻게 설명할까요? 내가 고른 카드와 같을까요?</p><p>③ 이번 주에 직접 해 보고 싶은 행동 한 가지는 무엇일까요?</p><p class="wa-closing">“어느 나라의 달력도 나의 미래를 대신 정하지 않아요. 내가 경험하고 선택하며 이야기를 만들어 가요.”</p></section><section class="wa-box"><h3>📜 탄생 이야기 보관하기</h3><div class="wa-actions"><button type="button" id="waCopy">📋 세계 이야기 복사</button><button type="button" id="waPrint">🖨️ 세계 보고서 인쇄·PDF</button></div><details><summary>📚 계산 근거·자료·주의할 점</summary><p>마야 촐킨은 GMT 584283 기준을 사용합니다. 구성기학은 기존 사주의 입춘 연도 기준을 사용하며, 시간이 불명확한 절기 경계는 확정하지 않습니다.</p><p>서양 태양 별자리는 보통 쓰는 날짜표 분류이며 경계일에는 천문 위치와 차이가 날 수 있습니다. 태국 탄생색은 성향 그래프에 포함하지 않습니다.</p><p>사주·구성기학은 공통의 동아시아 영향을 공유하므로 독립적인 운명 검증이 아니에요.</p><p>참고: <a href="https://maya.nmai.si.edu/sites/default/files/resources/The%20Maya%20Calendar%20System.pdf" target="_blank" rel="noopener noreferrer">스미스소니언 마야 달력</a> · <a href="https://chrysanthemumcalendar.com/nine-star-ki" target="_blank" rel="noopener noreferrer">구성기학 입춘 설명</a></p></details></section></div>`;}
+function voteSummary(){const yes=current?current.cards.filter(c=>selfVotes[c.id]==='yes').map(c=>c.name):[];const no=current?current.cards.filter(c=>selfVotes[c.id]==='no').map(c=>c.name):[];return '<p><b>😊 나와 닮은 카드:</b> '+(yes.length?yes.map(esc).join(' · '):'아직 고르지 않았어요')+'</p><p><b>🙂 나는 조금 다른 카드:</b> '+(no.length?no.map(esc).join(' · '):'아직 고르지 않았어요')+'</p>';}
+
+function bind(){let rootEl=document.getElementById('worldAtlas');if(!rootEl)return;
+ rootEl.onclick=function(e){let card=e.target.closest('[data-wa-card]'),f=e.target.closest('[data-wa-filter]'),vote=e.target.closest('[data-wa-vote]');if(vote){selfVotes[vote.dataset.waId]=vote.dataset.waVote;const c=current.cards.find(c=>c.id===vote.dataset.waId);document.getElementById('waDetailSlot').innerHTML=cardDetail(c);const sm=document.getElementById('waVoteSummary');if(sm)sm.innerHTML=voteSummary();return;}if(f){selected=f.dataset.waFilter;rootEl.querySelectorAll('.wa-filter').forEach(b=>b.classList.toggle('on',b===f));rootEl.querySelectorAll('.wa-tile').forEach(b=>{let c=current.cards.find(x=>x.id===b.dataset.waCard);b.hidden=selected==='computed'?c.status!=='computed':selected==='pending'?c.status==='computed':false;});return;}if(card){let c=current.cards.find(x=>x.id===card.dataset.waCard);let slot=document.getElementById('waDetailSlot');slot.innerHTML=cardDetail(c);slot.scrollIntoView({behavior:'smooth',block:'nearest'});return;}if(e.target.closest('#waCloseDetail')){document.getElementById('waDetailSlot').innerHTML='';document.querySelector('.wa-tiles').scrollIntoView({behavior:'smooth',block:'nearest'});return;}if(e.target.closest('#waCopy')){let text=reportText(current);if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(text).then(()=>waToast('세계 운세 요약을 복사했어요.'),()=>fallbackCopy(text));else fallbackCopy(text);return;}if(e.target.closest('#waPrint')){printAtlas();return;}};
+}
+function waToast(t){let el=document.getElementById('toast');if(!el)return;el.textContent=t;el.classList.add('on');setTimeout(()=>el.classList.remove('on'),2400);}
+function fallbackCopy(t){const box=document.createElement('textarea');box.value=t;document.body.appendChild(box);box.select();try{document.execCommand('copy');waToast('요약을 복사했어요.');}catch(e){waToast('복사가 지원되지 않아요. 직접 내용을 선택해 주세요.');}box.remove();}
+function printAtlas(){
+  const target=document.getElementById('reportPrint');if(!target||!current)return;
+  const old=target.innerHTML;
+  const blocks=current.cards.map(c=>'<section class="card"><h3>'+esc(c.name)+' · '+esc(c.region)+'</h3><p><b>'+esc(c.symbol)+'</b></p><p>'+esc(c.status==='computed'?cleanParticles(c.detail):c.intro)+'</p><p><b>생활 속 예시: </b>'+esc(cleanParticles(c.example))+'</p><p><b>확인할 점: </b>'+esc(c.status==='computed'?c.shadow:c.reason)+'</p></section>').join('');
+  const c=consensus(current.cards),n=c.eligible.length;
+  const top=c.tally.slice(0,10).map(t=>'<p>'+esc(t.name)+': '+t.cards.length+'/'+n+'개 체계 ('+t.groups.length+'개 문화권 그룹)</p>').join('');
+  target.innerHTML='<div class="print-title"><h1>세계 운명학 · 나의 탄생 이야기</h1><div class="print-sub">양력 '+current.solar.join('.')+' · 문화 체험용 · 계산 결과 '+current.known+'/12</div></div><section class="print-section"><h2>세계 운명학 공통 주제</h2><div class="card">'+top+'<p>이 수치는 프로그램이 만든 현대적 주제 분류의 등장 횟수이며, 사람의 성격이나 미래를 예측하는 확률이 아닙니다.</p></div></section><section class="print-section"><h2>12가지 문화의 탄생 이야기</h2>'+blocks+'</section><div class="footnote">성격 진단 또는 미래 예측 자료가 아닙니다. 각 카드에서 전통의 계산 기호와 현대적 해석을 구분했습니다. 출생일 등 개인정보가 포함되므로 공유에 주의하세요.</div>';
+  document.body.classList.add('wa-print-mode');
+  let restored=false;
+  const restore=()=>{if(restored)return;restored=true;document.body.classList.remove('wa-print-mode');target.innerHTML=old;window.removeEventListener('afterprint',restore);};
+  window.addEventListener('afterprint',restore);
+  try{window.print();}catch(e){restore();}
+  setTimeout(restore,30000);
+}
+
+global.WorldAtlas={render,bind,compute,consensus,reportText,print:printAtlas,zodiac};
+})(window);
+
+</script>
 <script>/* lunar-javascript v1.7.8 (MIT) https://github.com/6tail/lunar-javascript
 MIT License
 
@@ -1405,18 +1627,21 @@ if (typeof module !== 'undefined') module.exports = TX;
 
   function renderResult() {
     if(state.r.uncertain){renderUncertain();return;}
+    var host=$('#result');if(host){host.dataset.elementIndex=state.r&&Number.isInteger(state.r.dg)?String(Math.floor(state.r.dg/2)):' ';host.dataset.nick=state.inp.name||'';}
     var nav=$('#tabs');
     var advanced=TABS.filter(function(t){return t[0]!=='luck';});
-    var expertMode=state.tab!=='luck';
+    var expertMode=state.tab!=='luck'&&state.tab!=='world';
+    var worldMode=state.tab==='world';
     nav.innerHTML='<div class="mode-tabs" role="group" aria-label="결과 보기 모드">'
       +'<button type="button" class="mode-tab'+(!expertMode?' on':'')+'" data-mode="normal" aria-pressed="'+(!expertMode)+'">🌟 내 운세</button>'
+      +'<button type="button" class="mode-tab'+(worldMode?' on':'')+'" data-mode="world" aria-pressed="'+worldMode+'">🌍 세계 운명학</button>'
       +'<button type="button" class="mode-tab'+(expertMode?' on':'')+'" data-mode="expert" aria-pressed="'+expertMode+'">🔎 전문가용</button></div>'
       +(expertMode?'<div class="expert-links" aria-label="전문 분석 선택">'+advanced.map(function(t){return '<button type="button" data-t="'+t[0]+'"'+(state.tab===t[0]?' class="on" aria-current="page"':'')+'>'+t[1]+'</button>';}).join('')+'</div>':'');
     nav.onclick=function(e){
       var md=e.target.closest('button[data-mode]');
       if(md){
         if(state.tab==='ai'){var q0=$('#aiQ'),l0=$('#aiLv');if(q0)state.aiQ=q0.value;if(l0)state.aiLv=l0.value;}
-        state.tab=md.dataset.mode==='expert'?'chart':'luck';state.expertOpen=md.dataset.mode==='expert';renderResult();
+        state.tab=md.dataset.mode==='expert'?'chart':md.dataset.mode==='world'?'world':'luck';state.expertOpen=md.dataset.mode==='expert';renderResult();
         nav.scrollIntoView({behavior:'smooth',block:'start'});return;
       }
       var b=e.target.closest('button[data-t]');if(!b)return;
@@ -1426,6 +1651,7 @@ if (typeof module !== 'undefined') module.exports = TX;
     };
     $('#hero').innerHTML = expertMode?hero():'';
     if(state.aiTxt && state.aiSig!==aiSig()){state.aiTxt='';state.aiStale=true;}
+    if(worldMode){$('#panel').innerHTML=WorldAtlas.render(state.inp,state.r);$('#hero').innerHTML='';$('#easyToggle').hidden=true;WorldAtlas.bind();return;}
     $('#panel').innerHTML = josa(({ luck: tLuck, sum: tSum, chart: tChart, me: tMe, profile: tProfile, dae: tDae, year: tYear, month: tMonth, work: tWork, rel: tRel, gung: tGung, ai: tAi, words: tWords })[state.tab]());
     if(state.tab!=='luck')$('#hero').innerHTML = josa($('#hero').innerHTML);
     if(['sum','chart','me','dae','year','month','work','rel','profile'].indexOf(state.tab)>=0){
@@ -2058,11 +2284,12 @@ if (typeof module !== 'undefined') module.exports = TX;
   }
   function sharePreviewUpdate(){
     var yr=Number($('#shareYear').value)||DEF_Y;
+    if(state.tab==='world'){var d=WorldAtlas.compute(state.inp,state.r);var who=$('#shareName').checked?(state.inp.name||'이 사람')+'의 ':'나의 ';$('#sharePreview').value='🌍 '+who+'세계 탄생 카드 이야기\n'+d.cards.map(function(c){return c.name+': '+(c.status==='computed'?c.symbol:'문화 소개');}).join('\n')+'\n\n여러 나라의 달력 상징을 재미로 비교하는 이야기예요. 실제 성격과 미래를 예측하지 않아요.';return;}
     $('#sharePreview').value=sharedYearSummary(yr,$('#shareLength').value,$('#shareName').checked);
   }
   function openShare(){
     if(!state.r)return toast('먼저 운세를 봐 주세요.');
-    if(state.r.uncertain)return toast('시간에 따라 결과가 달라요. 하나로 정하기 전에는 운세를 공유하지 않아요.');
+    if(state.r.uncertain&&state.tab!=='world')return toast('시간에 따라 결과가 달라요. 하나로 정하기 전에는 운세를 공유하지 않아요.');
     var sel=$('#shareYear'),Y=state.year||DEF_Y;
     sel.innerHTML='';
     [Y, NOW, NOW+1, Y+1].filter(function(y,i,a){return y>=1910&&y<=2089&&a.indexOf(y)===i;}).forEach(function(y){var op=document.createElement('option');op.value=y;op.textContent=y+'년';sel.appendChild(op);});
@@ -2099,13 +2326,13 @@ if (typeof module !== 'undefined') module.exports = TX;
   };
   document.addEventListener('keydown',function(ev){if(ev.key==='Escape'&&!$('#shareSheet').hidden)closeShare();});
 
-  function shareText(){var r=state.r;if(!r)return '';var y=DEF_Y,t=yearTotal(r,y),g=SJ.yearGZ(y);return '🌟 '+(state.inp.name||'나')+'의 '+y+'년 운세 이야기\n'+LV[t.lv][0]+' '+LV[t.lv][1]+' · '+PLAIN_YEAR[SJ.flow(r,g[0],g[1]).gss].t+' 해\n이번 주 한 가지: 중요한 일 하나를 차근차근 정리하기\n(명리 나침반의 전통 상징 놀이, 미래 예측 아님)';}
+  function shareText(){var r=state.r;if(!r)return '';if(state.tab==='world'){var d=WorldAtlas.compute(state.inp,state.r);return '🌍 세계 탄생 카드 이야기\n'+d.cards.filter(function(c){return c.status==='computed';}).map(function(c){return c.name+': '+c.symbol;}).join('\n')+'\n(전통 상징 비교 놀이. 실제 성격 또는 미래 판정 아님)';}var y=DEF_Y,t=yearTotal(r,y),g=SJ.yearGZ(y);return '🌟 '+(state.inp.name||'나')+'의 '+y+'년 운세 이야기\n'+LV[t.lv][0]+' '+LV[t.lv][1]+' · '+PLAIN_YEAR[SJ.flow(r,g[0],g[1]).gss].t+' 해\n이번 주 한 가지: 중요한 일 하나를 차근차근 정리하기\n(명리 나침반의 전통 상징 놀이, 미래 예측 아님)';}
   function copyLuck(){var text=shareText();if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){toast('생년월일 없이 운세 한 줄을 복사했어요.');}).catch(function(){legacyCopy(text);});}else legacyCopy(text);}
   function legacyCopy(t){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{var copied=document.execCommand('copy');toast(copied?'운세 한 줄을 복사했어요.':'복사를 확인하지 못했어요. 직접 선택해 주세요.');}catch(e){toast('복사할 수 없어요. 기기에서 텍스트를 선택해 주세요.');}a.remove();}
 
   document.addEventListener('click',function(e){var sb=e.target.closest('[data-story]');if(sb){state.storyStep=+sb.dataset.story;refreshFortune();return;}if(e.target.closest('#shareLuck,#shareLuckMain')){return;}var back=e.target.closest('#backToMenu');if(back){var dest=$('#fortuneMenu');if(dest)dest.scrollIntoView({behavior:'smooth',block:'start'});return;}var b=e.target.closest('.mt[data-m]');if(b){state.menu=b.dataset.m;if(state.menu==='next')state.storyStep=0;if(state.menu==='today')state.dayOff=0;refreshFortune();var el=$('#fortuneView');if(el){var top=el.getBoundingClientRect().top+window.scrollY-110;window.scrollTo({top:top,behavior:'smooth'});}return;}var o=e.target.closest('.fv-day button[data-o]');if(o){state.dayOff=+o.dataset.o;refreshFortune();}});
   function friendHtml(e,size){return '<span class="fr f'+e+'"'+(size?' style="--s:'+size+'px"':'')+' aria-hidden="true"><i class="tp"></i><i class="bd"></i><i class="ck"></i><i class="fc"></i></span>';}
-  function condLine(){var i=state.inp,c=state.r.calc||{},tk=i.timeKind||(i.timeKnown?'exact':'unknown');var tt=tk==='exact'?p2(i.h)+':'+p2(i.mi):tk==='branch'?(['새벽 0~1시','새벽 1~3시','새벽 3~5시','오전 5~7시','오전 7~9시','오전 9~11시','오전 11~오후 1시','오후 1~3시','오후 3~5시','오후 5~7시','오후 7~9시','오후 9~11시','밤 11시~자정'][i.branch]||'시간대'):'시간 모름'+(i.pick?'(후보 선택)':'');return esc((i.gender==='M'?'남성':i.gender==='F'?'여성':'성별 없음')+' · '+(i.cal==='solar'?'양력':i.cal==='lunar'?'음력':'음력 윤달')+' '+i.y+'.'+i.m+'.'+i.d+' · '+tt+' · '+((c.mode||i.timeMode)==='std'?'표준시':(c.mode||i.timeMode)==='mean'?'지역 보정':'진태양시')+(i.noCity||!i.city?'':' · '+i.city)+' · v5.3');}
+  function condLine(){var i=state.inp,c=state.r.calc||{},tk=i.timeKind||(i.timeKnown?'exact':'unknown');var tt=tk==='exact'?p2(i.h)+':'+p2(i.mi):tk==='branch'?(['새벽 0~1시','새벽 1~3시','새벽 3~5시','오전 5~7시','오전 7~9시','오전 9~11시','오전 11~오후 1시','오후 1~3시','오후 3~5시','오후 5~7시','오후 7~9시','오후 9~11시','밤 11시~자정'][i.branch]||'시간대'):'시간 모름'+(i.pick?'(후보 선택)':'');return esc((i.gender==='M'?'남성':i.gender==='F'?'여성':'성별 없음')+' · '+(i.cal==='solar'?'양력':i.cal==='lunar'?'음력':'음력 윤달')+' '+i.y+'.'+i.m+'.'+i.d+' · '+tt+' · '+((c.mode||i.timeMode)==='std'?'표준시':(c.mode||i.timeMode)==='mean'?'지역 보정':'진태양시')+(i.noCity||!i.city?'':' · '+i.city)+' · v5.5');}
   function meCard(r){
     var d=TX.day[r.dg],e=GW[r.dg],nm=esc(state.inp.name||'나'),EN=['나무','불','흙','쇠','물'],EC=['#2FA58F','#E8513F','#F2B634','#ECE9E0','#6C7BC0'];
     var yz=r.p[0].z,mIdx=(r.p[1].z-2+12)%12;
@@ -2114,7 +2341,7 @@ if (typeof module !== 'undefined') module.exports = TX;
     var lg='<div class="lg">'+EN.map(function(n,i){return '<span>'+n+' <b>'+r.elPct[i]+'</b></span>';}).join('')+'</div>';
     var hi=highEl(r),lo=lowEl(r);
     function tile(Y,lab){var T=yearTotal(r,Y),w=LV[T.lv];return '<div><span class="wi" aria-hidden="true">'+w[0]+'</span><span><small>'+lab+' '+Y+'</small><b>'+w[1]+'</b><em>'+w[2]+'</em></span></div>';}
-    return '<section class="me-card mg'+e+'"><div class="mc-top">'+friendHtml(e)+'<div><div class="mc-who"><b>'+nm+'</b>은(는) <b>'+EN[e]+' 친구</b>예요</div><div class="mc-name">'+d.e+' '+d.n+'</div><div class="mc-sub">'+'태어난 날의 자연 비유 · '+SJ.ANIMAL[yz]+'띠 · '+JEOL[mIdx]+' 무렵 출생</div><div class="mc-tags">'+d.k.map(function(k){return '<span>#'+k+'</span>';}).join('')+'</div></div></div>'
+    return '<section class="me-card mg'+e+'"><div class="mc-top">'+friendHtml(e)+'<div><div class="mc-who"><b>'+nm+'</b>은(는) <b>'+EN[e]+' 친구</b>예요</div><div class="mc-name">'+d.e+' '+d.n+'</div><div class="mc-sub">'+'태어난 날의 자연 비유 · '+SJ.ANIMAL[yz]+'띠 · '+JEOL[mIdx]+' 무렵 출생</div><div class="mc-zodiac">✨ '+(function(){var solar=state.r.calc&&state.r.calc.solar||[state.inp.y,state.inp.m,state.inp.d];var z=WorldAtlas.zodiac(solar[1],solar[2]);return z[1]+' '+z[0]+' · 서양 태양 별자리';})()+'</div><div class="mc-tags">'+d.k.map(function(k){return '<span>#'+k+'</span>';}).join('')+'</div></div></div>'
       +'<div class="mc-el"><div class="cap">내 안의 다섯 기운 — 가장 많은 건 <b style="color:#fff">'+EN[hi]+'</b>, 가장 적은 건 <b style="color:#fff">'+EN[lo]+'</b></div>'+bar+lg+'</div>'
       +'<div class="mc-wx">'+tile(NOW,'올해')+tile(NOW+1,'내년')+'</div>'
       +'<p class="mc-cond">🧾 계산 조건: '+condLine()+'</p><p class="mc-foot">날씨는 전통 명리 상징을 쉽게 바꿔 표현한 참고용이에요. 같은 조건이면 언제 봐도 같은 결과가 나와요.</p></section>';
@@ -2481,15 +2708,19 @@ if (typeof module !== 'undefined') module.exports = TX;
   }
 
   function renderUncertain(){
+    var host=$('#result');if(host){host.dataset.elementIndex='';host.dataset.nick=state.inp.name||'';}
+    if(state.tab==='world'){var wn=$('#tabs');wn.innerHTML='<div class="mode-tabs"><button type="button" class="mode-tab" id="waBackUncertain">🧭 후보 사주</button><button type="button" class="mode-tab on">🌍 세계 운명학</button></div>';$('#hero').innerHTML='';$('#panel').innerHTML=WorldAtlas.render(state.inp,state.r);$('#easyToggle').hidden=true;WorldAtlas.bind();$('#waBackUncertain').onclick=function(){state.tab='luck';renderUncertain();};return;}
     var r=state.r,nav=$('#tabs');nav.innerHTML='<button class="on" role="tab" aria-selected="true">후보 명식</button>';$('#hero').innerHTML='<div class="card"><h3>출생시간에 따라 명식이 달라져요</h3><p>여러 후보가 있으므로 일간·용신·성향·궁합을 확정하지 않습니다.</p></div>';
     var h='<section class="card"><h3>🧭 가능한 사주 명식 비교</h3><p>'+esc(r.reason||'출생시간을 확인해 주세요.')+'</p><p class="hint">후보는 가능한 시간 구간을 대표하는 계산 결과입니다. 실제 출생시각을 알아야 하나를 선택할 수 있어요.</p>';
     h+=(r.candidates||[]).map(function(c,i){return '<div class="alts"><b>후보 '+(i+1)+'</b><div class="altrow"><span>'+esc(c.label||c.at||'시간 구간')+'</span><strong class="hz">'+esc((c.p||[]).filter(Boolean).slice().reverse().join(' '))+'</strong></div>'+(c.h!=null?'<button type="button" class="btn ghost full cand-pick" data-i="'+i+'" style="margin-top:8px">이 후보로 분석 보기</button>':'')+'</div>';}).join('');
     h+='<p class="small">후보를 고르면 그 후보로 분석하되, 결과 화면에 ‘사용자가 고른 후보’라는 경고가 계속 표시됩니다. 출생기록으로 확인되지 않았다면 결과를 참고용으로만 보세요.</p></section>';
-    $('#panel').innerHTML=h;var sw=$('#easyToggle');if(sw)sw.hidden=true;
+    h+='<div class="card"><h3>🌍 출생시간을 몰라도 세계 여행은 가능해요!</h3><p>별자리와 수비학, 마야 탄생 기호, 태어난 요일 같은 카드는 생일만으로 살펴볼 수 있어요. 사주처럼 시간이 중요한 결과는 확인할 때까지 기다릴게요.</p><button type="button" class="btn full" id="openWorldUncertain">🌍 생일로 세계 카드 보기</button></div>';
+    $('#panel').innerHTML=h;$('#openWorldUncertain').onclick=function(){state.tab='world';renderUncertain();};var sw=$('#easyToggle');if(sw)sw.hidden=true;
     $('#panel').querySelectorAll('.cand-pick').forEach(function(btn){btn.onclick=function(){var c=r.candidates[+btn.dataset.i];var inp2=JSON.parse(JSON.stringify(state.inp));inp2.pick={h:c.h,mi:c.mi};var r2=SJ.calc(inp2);if(r2.error||r2.uncertain)return toast(r2.error||'이 후보로 계산하지 못했습니다.');state.inp=inp2;state.r=r2;state.tab='luck';resetAi();renderResult();window.scrollTo(0,0);};});
   }
   function printReport(kind){
     if(!state.r)return toast('먼저 분석을 진행해 주세요.');
+    if(state.tab==='world'){WorldAtlas.print && WorldAtlas.print();return;}
     if(state.tab==='ai'){var q=$('#aiQ'),l=$('#aiLv'),t=$('#aiTxt');if(q)state.aiQ=q.value;if(l)state.aiLv=l.value;if(t)state.aiTxt=t.value;}
     var p=$('#reportPrint'), label=esc(state.inp.name||'이름 미입력'), year=state.year;
     var short=kind==='sum', easyWas=easyOn; if(short)easyOn=false;
@@ -2567,9 +2798,9 @@ function mount(){
  document.getElementById('goTarotBridge').onclick=function(){
   var q=((document.getElementById('askQuestion')||{}).value||'').trim();
   var category=(document.getElementById('askCategory')||{}).value||'auto';
-  var topic=({job:'job',work:'job',money:'money',study:'exam',love:'love',people:'friend',health:'health',move:'move',overall:'general'})[category]||'general';
-  var card=document.querySelector('.me-card'),el=null,m=card&&card.className.match(/mg(\d)/);if(m)el=+m[1];
-  var nickEl=document.querySelector('.mc-who b'),nick=nickEl?String(nickEl.textContent||'').trim().slice(0,20):'';
+  var topic=({job:'job',work:'job',money:'money',study:'study',love:'love',people:'people',health:'health',move:'move',overall:'general'})[category]||'general';
+  var card=document.querySelector('.me-card'),el=null,m=card&&card.className.match(/mg(\d)/);if(m)el=+m[1];if(el===null){var result=document.getElementById('result');if(result&&result.dataset.elementIndex.trim()!=='')el=Number(result.dataset.elementIndex);}
+  var nickEl=document.querySelector('.mc-who b'),nick=nickEl?String(nickEl.textContent||'').trim().slice(0,20):String((result&&result.dataset.nick)||'').slice(0,20);
   var head=document.querySelector('.luck-headline'),theme=head?String(head.textContent||'').replace(/\s+/g,' ').trim().slice(0,80):'';
   var linkId=Date.now().toString(36)+Math.random().toString(36).slice(2,7);
   var payload={question:q.slice(0,400),topic:topic,element:el,nick:nick,theme:theme,linkId:linkId,createdAt:Date.now(),source:'saju'};
