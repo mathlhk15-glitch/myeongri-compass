@@ -2855,5 +2855,174 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
 })();
 </script>
+<!-- ═════ 디자인 v6 레이어 · 콘셉트: 오방(五方) 천문대 — 남색 밤하늘 · 한지 · 오방색 ═════
+     기존 계산·해석·저장·공유·인쇄 코드는 건드리지 않고, 스타일과 안내 그림만 덧입힙니다. -->
+<style id="v6-design-layer">
+:root{--paper:#F3F0E6;--line:#DCD6C6;--hanji:#F3F0E6;--card:#FFFDF7;
+ --o0:#2FA58F;--o1:#E8513F;--o2:#E2A31B;--o3:#C9C5B8;--o4:#7C8BE0;
+ --f-d:"Noto Serif KR","Nanum Myeongjo","AppleMyungjo",serif}
+body{background:var(--hanji);background-image:radial-gradient(rgba(120,100,60,.06) 1px,transparent 1.3px);background-size:18px 18px}
+#form>.card,#result .card{border-radius:6px}
+/* 표지: 화면 전체 폭 남색 띠 */
+#form .intro{margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding-left:max(20px,calc(50vw - 520px));padding-right:max(20px,calc(50vw - 520px));
+ background-image:radial-gradient(1.2px 1.2px at 14% 30%,#ffffff70 50%,transparent 51%),radial-gradient(1px 1px at 64% 14%,#ffffff80 50%,transparent 51%),radial-gradient(1.3px 1.3px at 84% 70%,#ffffff60 50%,transparent 51%),radial-gradient(ellipse at 80% 120%,#2E3B73 0,transparent 60%)}
+#form .intro::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--o0) 0 20%,var(--o1) 20% 40%,var(--o2) 40% 60%,#E9E6DC 60% 80%,#7C8BE0 80%)}
+#form .intro h2{font-family:var(--f-d);letter-spacing:-.5px}
+.intro-more{display:inline-flex;align-items:center;gap:6px;margin:14px 0 0 8px;color:#E7C978;font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+/* 타로 바로가기: 보라 상자 → 얇은 띠 */
+.compass-cross-nav{background:#fff;border:1px solid var(--line);border-left:4px solid #5846b2;border-radius:4px}
+#crossSajuForm{position:relative;z-index:2}
+/* 결과 탭: 책갈피 */
+#tabs{background:var(--hanji)}
+#tabs button{border-radius:6px 6px 0 0;border-bottom-width:3px}
+#tabs button.on{box-shadow:inset 0 -3px 0 #E7C978}
+
+/* 오행 바퀴 (시그니처 인터랙션) */
+.wheel{position:relative;z-index:1;color:#F2EFE6}
+.wheel h3{margin:0 0 4px;font-family:var(--f-d);font-size:18px;font-weight:900}
+.wheel .wsub{margin:0 0 8px;font-size:13.5px;color:#B8C0DF}
+.wheel svg{display:block;width:100%;max-width:340px;margin:0 auto;overflow:visible}
+.wnode{cursor:pointer}
+.wnode circle{transition:r .25s,stroke-width .25s}
+.wnode:focus{outline:none}.wnode:focus-visible circle.wdot{stroke:#E7C978;stroke-width:4}
+.wline{transition:opacity .25s,stroke-width .25s}
+.wleg{display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:center;font-size:12.5px;color:#B8C0DF;margin:4px 0 8px}
+.wleg i{display:inline-block;width:22px;height:0;border-top:3px solid #E7C978;vertical-align:middle;margin-right:5px}
+.wleg i.k{border-top:2px dashed #E8513F}
+.wcap{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-left:4px solid var(--wc,#E7C978);border-radius:6px;padding:11px 13px;font-size:14.5px;line-height:1.7;min-height:128px}
+.wcap b.t{display:block;font-family:var(--f-d);font-size:17px;margin-bottom:2px}
+.wcap .s{color:#E7C978;font-weight:700}.wcap .k{color:#FF9B8C;font-weight:700}
+.wcap small{display:block;margin-top:6px;color:#9EA6C8;font-size:12px}
+/* 아래쪽 안내 영역(모바일에선 오행 바퀴도 여기로) */
+.learn{margin:34px 0 10px}
+.learn-h{display:flex;align-items:baseline;gap:10px;margin:0 0 6px}
+.learn-h span{font-family:var(--f-d);font-weight:900;font-size:44px;line-height:1;color:transparent;-webkit-text-stroke:1.3px #18214A}
+.learn-h h3{margin:0;font-family:var(--f-d);font-weight:900;font-size:21px;color:#18214A;letter-spacing:-.3px}
+.learn .lsub{margin:0 0 12px;color:#5B6382;font-size:15px}
+.learn .blk{margin:26px 0 0}
+.learn .blk>h4{margin:0 0 8px;font-family:var(--f-d);font-size:18px;color:#18214A}
+.learn .navy{background:#18214A;color:#F2EFE6;border-radius:6px;padding:18px 16px}
+/* 네 기둥 여덟 글자 */
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.pl{border:1.5px solid #C9C2AE;background:var(--card);border-radius:4px;padding:8px 4px 10px;text-align:center;cursor:pointer;transition:transform .15s,border-color .15s}
+.pl[aria-pressed="true"]{border-color:#18214A;box-shadow:inset 0 -4px 0 #E2A31B;transform:translateY(-3px)}
+.pl .nm{display:block;font-weight:800;font-size:13.5px;color:#18214A}
+.pl .cell{display:grid;place-items:center;height:48px;margin:6px auto 0;width:48px;border-radius:6px;font-family:var(--f-d);font-weight:900;font-size:13px;line-height:1.15}
+.pl .cell.top{background:#18214A;color:#E7C978}
+.pl .cell.bot{background:#E9E3D2;color:#18214A}
+.pl small{display:block;font-size:11.5px;color:#5B6382;margin-top:6px;line-height:1.35}
+.plrow{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:4px;font-size:11.5px;color:#5B6382;text-align:center}
+.plinfo{margin-top:10px;background:var(--card);border:1px solid var(--line);border-left:4px solid #18214A;border-radius:4px;padding:12px 14px;font-size:15px;min-height:104px}
+.plinfo b{font-family:var(--f-d);font-size:16.5px}
+.calcnote{font-size:13px;color:#5B6382;margin:8px 0 0}
+.letters{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}
+.letters>div{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:10px 12px;font-size:14px}
+.letters b{display:block;font-size:14.5px;color:#18214A}
+.letters .hz{letter-spacing:2px;font-size:15px}
+/* 절기 띠 */
+.jeolgi{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.jg{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--c);border-radius:3px;padding:6px 4px;text-align:center;font-size:12px;line-height:1.35}
+.jg b{display:block;font-family:var(--f-d);font-size:14px;color:#18214A}
+.jg.first{background:#FFF6DD;border-color:#E2A31B}
+.lnote{margin:12px 0 0;padding:12px 14px;border:1.5px dashed #B8892E;border-radius:4px;background:#FFFBF0;font-size:14.5px}
+.lnote b{color:#7E5C12}
+@media(min-width:560px){.jeolgi{grid-template-columns:repeat(6,1fr)}.letters{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){
+ #form .intro{display:grid;grid-template-columns:minmax(0,1fr) 380px;column-gap:48px;align-items:start;padding-top:40px;padding-bottom:44px}
+ #form .intro>*:not(.ring):not(.wheel){grid-column:1}
+ #form .intro .wheel{grid-column:2;grid-row:1/span 6}
+ #form .intro .bubble{justify-self:start}
+ #form .intro h2{font-size:44px;line-height:1.2}
+ #form .intro p{font-size:16px;max-width:28em}
+ .intro-more{display:none}
+}
+@media(max-width:899px){#form .intro .wheel{display:none}}
+@media(max-width:360px){.pl .cell{width:42px;height:42px;font-size:12px}.pl .nm{font-size:12.5px}}
+@media(prefers-reduced-motion:reduce){.pl,.wnode circle,.wline{transition:none}}
+@media print{.learn{display:none!important}}
+</style>
+<script id="v6-design-layer-js">
+(function(){'use strict';
+var E=[
+ {k:'木',n:'나무',tp:'나무는',c:'#2FA58F',info:'봄 · 동쪽 · 푸른색',kw:'자라남과 시작',s:'불을 키워요 — 마른 나무는 좋은 땔감이에요.',sr:'물을 마시고 자라요.',g:'흙을 파고들어요 — 뿌리가 땅을 비집고 들어가요.',gr:'쇠(도끼)에 베여요.'},
+ {k:'火',n:'불',tp:'불은',c:'#E8513F',info:'여름 · 남쪽 · 붉은색',kw:'드러냄과 열정',s:'흙을 만들어요 — 타고 남은 재가 흙이 돼요.',sr:'나무를 태우며 커져요.',g:'쇠를 녹여요.',gr:'물에 꺼져요.'},
+ {k:'土',n:'흙',tp:'흙은',c:'#E2A31B',info:'환절기 · 가운데 · 노란색',kw:'버팀과 중재',s:'쇠를 품어요 — 땅속에서 광물이 나와요.',sr:'불이 남긴 재로 쌓여요.',g:'물을 막아요 — 흙으로 쌓은 둑이에요.',gr:'나무뿌리가 파고들면 흩어져요.'},
+ {k:'金',n:'쇠',tp:'쇠는',c:'#E9E6DC',info:'가을 · 서쪽 · 흰색',kw:'정리와 결단',s:'물을 만들어요 — 차가운 쇠에 물방울이 맺혀요.',sr:'흙(땅) 속에서 나와요.',g:'나무를 베어요 — 도끼와 톱이에요.',gr:'불에 녹아요.'},
+ {k:'水',n:'물',tp:'물은',c:'#7C8BE0',info:'겨울 · 북쪽 · 검은색',kw:'지혜와 유연함',s:'나무를 키워요.',sr:'쇠에 맺힌 물방울에서 생겨요.',g:'불을 꺼요.',gr:'흙 둑에 막혀요.'}];
+var CX=170,CY=165,R=112,NR=29;
+function pos(i){var a=(-90+i*72)*Math.PI/180;return [CX+R*Math.cos(a),CY+R*Math.sin(a)]}
+function shorten(a,b,d){var dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy);return [[a[0]+dx/L*d,a[1]+dy/L*d],[b[0]-dx/L*d,b[1]-dy/L*d]]}
+function svg(){
+ var h='<defs><marker id="wa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#E7C978"/></marker><marker id="wk" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#E8513F"/></marker></defs>';
+ h+='<circle cx="'+CX+'" cy="'+CY+'" r="'+R+'" fill="none" stroke="#ffffff" stroke-opacity=".08" stroke-width="18"/>';
+ for(var i=0;i<5;i++){
+  var a=pos(i),b=pos((i+1)%5),c=pos((i+2)%5);
+  var mid=(-90+i*72+36)*Math.PI/180,cr=R+22,mx=CX+cr*Math.cos(mid),my=CY+cr*Math.sin(mid);
+  var s1=shorten(a,b,NR+6);
+  h+='<path class="wline s" data-from="'+i+'" d="M'+s1[0][0].toFixed(1)+' '+s1[0][1].toFixed(1)+' Q'+mx.toFixed(1)+' '+my.toFixed(1)+' '+s1[1][0].toFixed(1)+' '+s1[1][1].toFixed(1)+'" fill="none" stroke="#E7C978" stroke-width="2.5" marker-end="url(#wa)"/>';
+  var s2=shorten(a,c,NR+8);
+  h+='<line class="wline k" data-from="'+i+'" x1="'+s2[0][0].toFixed(1)+'" y1="'+s2[0][1].toFixed(1)+'" x2="'+s2[1][0].toFixed(1)+'" y2="'+s2[1][1].toFixed(1)+'" stroke="#E8513F" stroke-width="1.8" stroke-dasharray="5 5" marker-end="url(#wk)"/>';
+ }
+ for(var j=0;j<5;j++){var p=pos(j);
+  h+='<g class="wnode" data-i="'+j+'" tabindex="0" role="button" aria-label="'+E[j].n+' '+E[j].k+' 설명 보기"><circle class="wdot" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+NR+'" fill="'+E[j].c+'" stroke="#18214A" stroke-width="3"/><text x="'+p[0].toFixed(1)+'" y="'+(p[1]+2).toFixed(1)+'" text-anchor="middle" font-family="Noto Serif KR,serif" font-weight="900" font-size="21" fill="'+(j===3?'#18214A':'#fff')+'">'+E[j].k+'</text><text x="'+p[0].toFixed(1)+'" y="'+(p[1]+17).toFixed(1)+'" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+(j===3?'#18214A':'#fff')+'">'+E[j].n+'</text></g>';}
+ return h;
+}
+function build(){
+ var w=document.createElement('div');w.className='wheel';w.id='v6Wheel';
+ w.innerHTML='<h3>오행, 서로 어떤 사이일까?</h3><p class="wsub">동그라미를 눌러 보세요. 다섯 기운이 서로 돕고 견제하는 관계가 보여요.</p><svg viewBox="0 0 340 330" role="group" aria-label="오행 상생 상극 관계도">'+svg()+'</svg><div class="wleg"><span><i></i>살려 줌(상생)</span><span><i class="k"></i>눌러 줌(상극)</span></div><div class="wcap" id="v6Cap" aria-live="polite"></div>';
+ return w;
+}
+function select(w,i){
+ var e=E[i];
+ w.querySelectorAll('.wnode').forEach(function(g){var on=+g.dataset.i===i;g.querySelector('circle').setAttribute('r',on?NR+4:NR);g.setAttribute('aria-pressed',String(on));});
+ w.querySelectorAll('.wline').forEach(function(l){var f=+l.dataset.from,s=l.classList.contains('s');
+  var rel=s?(f===i||(f+1)%5===i):(f===i||(f+2)%5===i);l.style.opacity=rel?1:.18;l.setAttribute('stroke-width',rel?(s?3.5:2.5):(s?2:1.5));});
+ var cap=w.querySelector('.wcap');cap.style.setProperty('--wc',e.c);
+ cap.innerHTML='<b class="t">'+e.n+' '+e.k+' — '+e.kw+'</b>'+e.info+'<br><span class="s">살려 줌</span> '+e.tp+' '+e.s+' 또 '+e.sr+'<br><span class="k">눌러 줌</span> '+e.tp+' '+e.g+' 또 '+e.gr+'<small>전통 명리의 상징 체계를 쉬운 비유로 옮긴 설명이에요. 과학적 법칙이 아니에요.</small>';
+}
+function bindWheel(w){
+ w.addEventListener('click',function(ev){var g=ev.target.closest('.wnode');if(g)select(w,+g.dataset.i)});
+ w.addEventListener('keydown',function(ev){var g=ev.target.closest('.wnode');if(!g)return;if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();select(w,+g.dataset.i)}});
+ select(w,0);
+}
+var P=[
+ {n:'시주',sub:'時柱',t:'태어난 시각',d:'하루를 2시간씩 12칸으로 나눈 시간대예요(예: 오전 9~11시 = 사시). 전통 해석에서는 자녀·노년을 상징해요. 출생 시간을 모르면 이 기둥이 비어 6글자로만 봐요.'},
+ {n:'일주',sub:'日柱',t:'태어난 날',d:'60가지 날짜 이름이 순서대로 돌아가요. 전통 명리에서는 이 기둥의 위 글자(일간)를 ‘나 자신’으로 보고, 나머지 일곱 글자를 이 글자와의 관계로 읽어요. 배우자 자리로도 봐요.'},
+ {n:'월주',sub:'月柱',t:'태어난 달',d:'달력의 1일이 아니라 절기(아래 띠)로 달이 바뀌어요. 전통 해석에서는 부모·자라 온 환경, 청년기를 상징해요.'},
+ {n:'연주',sub:'年柱',t:'태어난 해',d:'1월 1일이 아니라 입춘(2월 4일 무렵)에 해가 바뀌어요. 그래서 1월생은 앞 해의 띠가 될 수 있어요. 전통 해석에서는 조상·어린 시절을 상징해요.'}];
+var J=[['입춘','2/4','寅',0],['경칩','3/6','卯',0],['청명','4/5','辰',2],['입하','5/6','巳',1],['망종','6/6','午',1],['소서','7/7','未',2],['입추','8/8','申',3],['백로','9/8','酉',3],['한로','10/8','戌',2],['입동','11/7','亥',4],['대설','12/7','子',4],['소한','1/6','丑',2]];
+function learnHtml(){
+ return '<section class="learn" id="v6Learn" aria-label="사주 쉽게 이해하기">'
+ +'<div class="learn-h"><span aria-hidden="true">8</span><h3>사주는 ‘네 기둥, 여덟 글자’예요</h3></div>'
+ +'<p class="lsub">태어난 해·달·날·시각을 각각 두 글자로 바꾸면 기둥 4개, 글자 8개가 돼요. 그래서 ‘사주팔자(四柱八字)’예요. 기둥을 눌러 보세요.</p>'
+ +'<div class="pillars" role="group" aria-label="네 기둥">'+P.map(function(p,i){return '<button type="button" class="pl" data-p="'+i+'" aria-pressed="false"><span class="nm">'+p.n+'</span><span class="cell top">하늘<br>글자</span><span class="cell bot">땅<br>글자</span><small>'+p.t+'</small></button>'}).join('')+'</div>'
+ +'<div class="plinfo" id="v6Pl" aria-live="polite"></div>'
+ +'<div class="letters"><div><b>하늘 글자(천간) 10가지</b><span class="hz">甲 乙 丙 丁 戊 己 庚 辛 壬 癸</span><br>갑 을 병 정 무 기 경 신 임 계</div><div><b>땅 글자(지지) 12가지 = 띠</b><span class="hz">子 丑 寅 卯 辰 巳 午 未 申 酉 戌 亥</span><br>쥐 소 범 토끼 용 뱀 말 양 원숭이 닭 개 돼지</div></div>'
+ +'<p class="calcnote">계산: 10 × 12 = 120이 아니라 <b>60가지</b>(60갑자)만 쓰여요. 하늘 글자와 땅 글자가 하나씩 함께 넘어가서, 10과 12의 최소공배수인 60번째에 처음 조합으로 돌아오기 때문이에요. 환갑(還甲)이 만 60세인 이유도 이것이에요.</p>'
+ +'<div class="blk"><h4>달이 바뀌는 날: 1일이 아니라 ‘절기’</h4><p class="lsub">사주의 한 해는 입춘에 시작하고, 달은 아래 12절기에 바뀌어요. 이 날 근처에 태어났다면 몇 시에 태어났는지에 따라 기둥이 달라질 수 있어요. 날짜는 해마다 하루쯤 달라지는 대략적인 값이에요.</p>'
+ +'<div class="jeolgi">'+J.map(function(j,i){var c=['#2FA58F','#E8513F','#E2A31B','#B8B3A3','#2A3566'][j[3]];return '<div class="jg'+(i===0?' first':'')+'" style="--c:'+c+'"><b>'+j[0]+'</b>'+j[1]+' 무렵<br>'+j[2]+'월</div>'}).join('')+'</div></div>'
+ +'<div class="blk" id="v6WheelSlot"></div>'
+ +'<p class="lnote"><b>이 도구를 읽는 법.</b> 계산(달력·절기·시간 보정)은 정확하게 하려고 노력했지만, 해석은 전통 명리의 상징을 쉬운 이야기로 옮긴 참고용이에요. 과학적으로 검증된 예측이 아니니, 진학·취업·건강·돈 같은 중요한 결정은 실제 정보와 전문가의 조언을 함께 보세요.</p>'
+ +'</section>';
+}
+function selectP(i){document.querySelectorAll('#v6Learn .pl').forEach(function(b){b.setAttribute('aria-pressed',String(+b.dataset.p===i))});var p=P[i];document.getElementById('v6Pl').innerHTML='<b>'+p.n+'('+p.sub+') · '+p.t+'</b><br>'+p.d;}
+function init(){
+ try{
+  var form=document.getElementById('form'),intro=form&&form.querySelector('.intro');if(!form||!intro||document.getElementById('v6Learn'))return;
+  var w=build();intro.appendChild(w);bindWheel(w);
+  var more=document.createElement('a');more.href='#v6Learn';more.className='intro-more';more.textContent='사주가 처음이라면? 그림으로 이해하기 ↓';
+  var bubble=intro.querySelector('.bubble');if(bubble)bubble.insertAdjacentElement('afterend',more);else intro.appendChild(more);
+  var foot=null;for(var ci=0;ci<form.children.length;ci++){if(form.children[ci].classList.contains('foot'))foot=form.children[ci];}var holder=document.createElement('div');holder.innerHTML=learnHtml();var learn=holder.firstChild;
+  if(foot)foot.insertAdjacentElement('afterend',learn);else form.appendChild(learn);
+  learn.addEventListener('click',function(ev){var b=ev.target.closest('.pl');if(b)selectP(+b.dataset.p)});selectP(1);
+  var slot=document.getElementById('v6WheelSlot'),mq=window.matchMedia('(min-width:900px)');
+  function place(){if(mq.matches){if(w.parentNode!==intro)intro.appendChild(w);slot.classList.remove('navy');slot.hidden=true;}else{slot.hidden=false;slot.classList.add('navy');if(w.parentNode!==slot)slot.appendChild(w);}}
+  place();if(mq.addEventListener)mq.addEventListener('change',place);else if(mq.addListener)mq.addListener(place);
+ }catch(e){}
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+
 </body>
 </html>
